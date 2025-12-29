@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <!-- Cache control (removed in production - handled by server) -->
 
     <!-- Primary Meta Tags -->
     <title>LifeSpring Water Foundation | Building Water Security with Local Leadership</title>
@@ -60,6 +58,14 @@
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Performance: Preload critical resources -->
+    <link rel="preload" href="/src/main.js" as="script" />
+    <link rel="preload" href="/src/style.css" as="style" />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />

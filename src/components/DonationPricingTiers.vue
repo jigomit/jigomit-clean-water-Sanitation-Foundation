@@ -681,17 +681,20 @@ const handleDonate = () => {
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+  background: #1a3a4a;
+  min-height: 100vh;
+  padding: 4rem 0;
 }
 
 .pricing-success-card {
-  background: linear-gradient(135deg, #0f3558 0%, #0a2540 50%, #0f3558 100%);
+  background: linear-gradient(135deg, #15303d 0%, #0f2540 50%, #15303d 100%);
   color: #ffffff;
   border-radius: 24px;
   padding: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
   box-shadow: 
     0 20px 60px rgba(15, 53, 88, 0.4),
     0 8px 24px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(11, 178, 212, 0.2);
+  border: 1px solid rgba(11, 178, 212, 0.3);
   backdrop-filter: blur(24px);
   text-align: center;
   position: relative;
@@ -751,44 +754,56 @@ const handleDonate = () => {
 .success-title {
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 800;
-  color: #0bb2d4;
+  color: #abdcef;
   margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
   line-height: 1.25;
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 20px rgba(11, 178, 212, 0.3);
+  text-shadow: 0 2px 20px rgba(171, 220, 239, 0.5);
+  opacity: 1;
 }
 
 .success-message {
   font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-  color: rgba(255, 255, 255, 0.95);
+  color: #e0e0e0;
   margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
   line-height: 1.7;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  opacity: 1;
 }
 
 .success-message strong {
   color: #0bb2d4;
   font-weight: 700;
   font-size: 1.15em;
-  text-shadow: 0 2px 12px rgba(11, 178, 212, 0.4);
+  text-shadow: 0 2px 12px rgba(11, 178, 212, 0.6);
+  opacity: 1;
 }
 
 .success-details {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(21, 48, 61, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: clamp(1.75rem, 3.5vw, 2.5rem);
   margin: clamp(1.75rem, 3.5vw, 2.5rem) 0;
-  border: 1px solid rgba(11, 178, 212, 0.25);
+  border: 1px solid rgba(11, 178, 212, 0.3);
   text-align: left;
 }
 
 .success-details p {
   font-size: clamp(0.95rem, 1.9vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.9);
+  color: #e0e0e0;
   line-height: 1.7;
   margin-bottom: 1.25rem;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.success-details h3 {
+  color: rgba(11, 178, 212, 0.8);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  opacity: 1;
 }
 
 .success-details p:last-child {

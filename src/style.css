@@ -3948,6 +3948,7 @@ main {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   position: relative;
+  will-change: background-position;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -5046,22 +5047,29 @@ main {
 }
 
 .fullscreen-section--cta .btn-modern--ghost {
-  background: #e8f8f5;
-  border: 2px solid #b0dde8;
-  color: #ffffff;
+  background: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #0f76d6;
 }
 
 .fullscreen-section--cta .btn-modern--ghost:hover {
-  background: #d0f0eb;
-  border-color: #8dd0e0;
-  color: #ffffff !important;
+  background: #f8f9fa;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #0bb2d4 !important;
+}
+
+.fullscreen-section--cta .btn-modern--ghost:hover,
+.fullscreen-section--cta .btn-modern--ghost:hover *,
+.fullscreen-section--cta .btn-modern--ghost:hover > *,
+.fullscreen-section--cta .btn-modern--ghost:hover span {
+  color: #0bb2d4 !important;
 }
 
 .fullscreen-section--cta .btn-modern--ghost,
 .fullscreen-section--cta .btn-modern--ghost *,
 .fullscreen-section--cta .btn-modern--ghost > *,
 .fullscreen-section--cta .btn-modern--ghost span {
-  color: #ffffff !important;
+  color: #0f76d6 !important;
 }
 
 .cta-modern__visual {
@@ -5385,16 +5393,19 @@ main {
 .wave-layer--1 {
   animation: waveMove 15s linear infinite;
   z-index: 3;
+  will-change: transform;
 }
 
 .wave-layer--2 {
   animation: waveMove 18s linear infinite reverse;
   z-index: 2;
+  will-change: transform;
 }
 
 .wave-layer--3 {
   animation: waveMove 22s linear infinite;
   z-index: 1;
+  will-change: transform;
 }
 
 @keyframes waveMove {
@@ -5430,6 +5441,7 @@ main {
   opacity: 0;
   animation: dropletRise 12s ease-in-out infinite;
   filter: blur(0.5px);
+  will-change: transform, opacity;
 }
 
 .droplet:nth-child(odd) {
@@ -5492,6 +5504,7 @@ main {
   border: 2px solid rgba(11, 178, 212, 0.3);
   border-radius: 50%;
   animation: rippleExpand 6s ease-out infinite;
+  will-change: transform, opacity;
 }
 
 .ripple--1 {
@@ -7960,6 +7973,7 @@ main {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   position: relative;
+  will-change: background-position;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -9058,22 +9072,29 @@ main {
 }
 
 .fullscreen-section--cta .btn-modern--ghost {
-  background: #e8f8f5;
-  border: 2px solid #b0dde8;
-  color: #ffffff;
+  background: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #0f76d6;
 }
 
 .fullscreen-section--cta .btn-modern--ghost:hover {
-  background: #d0f0eb;
-  border-color: #8dd0e0;
-  color: #ffffff !important;
+  background: #f8f9fa;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #0bb2d4 !important;
+}
+
+.fullscreen-section--cta .btn-modern--ghost:hover,
+.fullscreen-section--cta .btn-modern--ghost:hover *,
+.fullscreen-section--cta .btn-modern--ghost:hover > *,
+.fullscreen-section--cta .btn-modern--ghost:hover span {
+  color: #0bb2d4 !important;
 }
 
 .fullscreen-section--cta .btn-modern--ghost,
 .fullscreen-section--cta .btn-modern--ghost *,
 .fullscreen-section--cta .btn-modern--ghost > *,
 .fullscreen-section--cta .btn-modern--ghost span {
-  color: #ffffff !important;
+  color: #0f76d6 !important;
 }
 
 .cta-modern__visual {
@@ -10913,6 +10934,7 @@ main {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   position: relative;
+  will-change: background-position;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -12011,22 +12033,29 @@ main {
 }
 
 .fullscreen-section--cta .btn-modern--ghost {
-  background: #e8f8f5;
-  border: 2px solid #b0dde8;
-  color: #ffffff;
+  background: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #0f76d6;
 }
 
 .fullscreen-section--cta .btn-modern--ghost:hover {
-  background: #d0f0eb;
-  border-color: #8dd0e0;
-  color: #ffffff !important;
+  background: #f8f9fa;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #0bb2d4 !important;
+}
+
+.fullscreen-section--cta .btn-modern--ghost:hover,
+.fullscreen-section--cta .btn-modern--ghost:hover *,
+.fullscreen-section--cta .btn-modern--ghost:hover > *,
+.fullscreen-section--cta .btn-modern--ghost:hover span {
+  color: #0bb2d4 !important;
 }
 
 .fullscreen-section--cta .btn-modern--ghost,
 .fullscreen-section--cta .btn-modern--ghost *,
 .fullscreen-section--cta .btn-modern--ghost > *,
 .fullscreen-section--cta .btn-modern--ghost span {
-  color: #ffffff !important;
+  color: #0f76d6 !important;
 }
 
 .cta-modern__visual {
@@ -13853,6 +13882,7 @@ main {
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   position: relative;
+  will-change: background-position;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -14951,22 +14981,29 @@ main {
 }
 
 .fullscreen-section--cta .btn-modern--ghost {
-  background: #e8f8f5;
-  border: 2px solid #b0dde8;
-  color: #ffffff;
+  background: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #0f76d6;
 }
 
 .fullscreen-section--cta .btn-modern--ghost:hover {
-  background: #d0f0eb;
-  border-color: #8dd0e0;
-  color: #ffffff !important;
+  background: #f8f9fa;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #0bb2d4 !important;
+}
+
+.fullscreen-section--cta .btn-modern--ghost:hover,
+.fullscreen-section--cta .btn-modern--ghost:hover *,
+.fullscreen-section--cta .btn-modern--ghost:hover > *,
+.fullscreen-section--cta .btn-modern--ghost:hover span {
+  color: #0bb2d4 !important;
 }
 
 .fullscreen-section--cta .btn-modern--ghost,
 .fullscreen-section--cta .btn-modern--ghost *,
 .fullscreen-section--cta .btn-modern--ghost > *,
 .fullscreen-section--cta .btn-modern--ghost span {
-  color: #ffffff !important;
+  color: #0f76d6 !important;
 }
 
 .cta-modern__visual {

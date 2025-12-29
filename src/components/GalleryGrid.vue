@@ -14,7 +14,7 @@ import { galleryImages } from '@/data/content'
         <div class="gallery-grid">
           <figure v-for="image in galleryImages" :key="image.caption" class="gallery-tile" data-reveal>
             <div class="gallery-media">
-              <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" />
+              <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" fetchpriority="low" />
             </div>
             <figcaption class="gallery-caption">
               <p class="gallery-caption__title">{{ image.caption }}</p>
