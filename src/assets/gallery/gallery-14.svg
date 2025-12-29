@@ -1,0 +1,38 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Community planning meeting">
+  <defs>
+    <linearGradient id="g14-ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4c4a8"/>
+      <stop offset="100%" stop-color="#b8a890"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="#e8f4f8"/>
+  <!-- Tree for shade -->
+  <circle cx="500" cy="80" rx="70" ry="50" fill="#5a8f6a"/>
+  <rect x="490" y="130" width="20" height="90" fill="#5d4e37"/>
+  <!-- Ground -->
+  <rect y="220" width="600" height="180" fill="url(#g14-ground)"/>
+  <!-- People sitting in circle -->
+  <!-- Person 1 -->
+  <circle cx="200" cy="240" r="22" fill="#f39c6b"/>
+  <rect x="185" y="262" width="30" height="45" fill="#0bb2d4" rx="4"/>
+  <!-- Person 2 -->
+  <circle cx="280" cy="230" r="20" fill="#f39c6b"/>
+  <rect x="266" y="250" width="28" height="42" fill="#49d391" rx="4"/>
+  <!-- Person 3 -->
+  <circle cx="360" cy="235" r="21" fill="#f39c6b"/>
+  <rect x="346" y="256" width="28" height="44" fill="#f39c6b" opacity="0.7" rx="4"/>
+  <!-- Person 4 -->
+  <circle cx="420" cy="245" r="22" fill="#f39c6b"/>
+  <rect x="405" y="267" width="30" height="46" fill="#1b4e80" rx="4"/>
+  <!-- Person 5 -->
+  <circle cx="320" cy="290" r="20" fill="#f39c6b"/>
+  <rect x="306" y="310" width="28" height="43" fill="#0fa3b1" rx="4"/>
+  <!-- Person 6 -->
+  <circle cx="250" cy="295" r="21" fill="#f39c6b"/>
+  <rect x="236" y="316" width="28" height="44" fill="#49d391" rx="4"/>
+  <!-- Map/plan in center -->
+  <rect x="280" y="270" width="70" height="50" fill="#fff" stroke="#1b4e80" stroke-width="3" rx="3"/>
+  <circle cx="300" cy="285" r="6" fill="#0bb2d4"/>
+  <line x1="310" y1="285" x2="335" y2="285" stroke="#49d391" stroke-width="3"/>
+  <line x1="290" y1="300" x2="330" y2="300" stroke="#f39c6b" stroke-width="2"/>
+</svg>

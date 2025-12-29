@@ -1,0 +1,28 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Solar panel installation">
+  <defs>
+    <linearGradient id="g8-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#87ceeb"/>
+      <stop offset="100%" stop-color="#e0f7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g8-sky)"/>
+  <!-- Sun -->
+  <circle cx="500" cy="80" r="40" fill="#ffd700" opacity="0.8"/>
+  <!-- Ground -->
+  <rect y="280" width="600" height="120" fill="#a8d5a3"/>
+  <!-- Solar panel array -->
+  <rect x="150" y="150" width="140" height="100" fill="#1b3a52" rx="4" transform="rotate(-15 220 200)"/>
+  <g transform="rotate(-15 220 200)">
+    <line x1="150" y1="183" x2="290" y2="183" stroke="#0bb2d4" stroke-width="2"/>
+    <line x1="150" y1="217" x2="290" y2="217" stroke="#0bb2d4" stroke-width="2"/>
+    <line x1="185" y1="150" x2="185" y2="250" stroke="#0bb2d4" stroke-width="2"/>
+    <line x1="220" y1="150" x2="220" y2="250" stroke="#0bb2d4" stroke-width="2"/>
+    <line x1="255" y1="150" x2="255" y2="250" stroke="#0bb2d4" stroke-width="2"/>
+  </g>
+  <!-- Support structure -->
+  <rect x="145" y="250" width="8" height="50" fill="#1b4e80"/>
+  <rect x="282" y="250" width="8" height="50" fill="#1b4e80"/>
+  <!-- Well structure -->
+  <rect x="380" y="220" width="50" height="80" fill="#1b4e80" rx="6"/>
+  <rect x="392" y="200" width="26" height="26" fill="#0fa3b1" rx="4"/>
+</svg>

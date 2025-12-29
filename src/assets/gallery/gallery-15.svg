@@ -1,0 +1,40 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mothers circle meeting">
+  <defs>
+    <linearGradient id="g15-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff4e6"/>
+      <stop offset="100%" stop-color="#ffe6d9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g15-bg)"/>
+  <!-- Ground -->
+  <rect y="300" width="600" height="100" fill="#d4c4a8"/>
+  <!-- Women in circle with babies -->
+  <!-- Woman 1 -->
+  <circle cx="180" cy="220" r="24" fill="#f39c6b"/>
+  <rect x="163" y="244" width="34" height="50" fill="#49d391" rx="4"/>
+  <circle cx="160" cy="270" r="10" fill="#f39c6b"/>
+  <!-- Woman 2 -->
+  <circle cx="280" cy="200" r="22" fill="#f39c6b"/>
+  <rect x="265" y="222" width="30" height="48" fill="#0bb2d4" rx="4"/>
+  <!-- Woman 3 -->
+  <circle cx="380" cy="205" r="23" fill="#f39c6b"/>
+  <rect x="364" y="228" width="32" height="50" fill="#f39c6b" opacity="0.7" rx="4"/>
+  <circle cx="405" cy="255" r="11" fill="#f39c6b"/>
+  <!-- Woman 4 -->
+  <circle cx="460" cy="225" r="24" fill="#f39c6b"/>
+  <rect x="443" y="249" width="34" height="52" fill="#1b4e80" rx="4"/>
+  <!-- Woman 5 -->
+  <circle cx="400" cy="280" r="22" fill="#f39c6b"/>
+  <rect x="385" y="302" width="30" height="48" fill="#49d391" rx="4"/>
+  <!-- Woman 6 -->
+  <circle cx="300" cy="290" r="23" fill="#f39c6b"/>
+  <rect x="284" y="313" width="32" height="50" fill="#0fa3b1" rx="4"/>
+  <!-- Woman 7 -->
+  <circle cx="210" cy="280" r="22" fill="#f39c6b"/>
+  <rect x="195" y="302" width="30" height="47" fill="#49d391" rx="4"/>
+  <!-- Hygiene items in center (soap, tippy-tap model) -->
+  <rect x="300" y="235" width="25" height="18" fill="#ffe6d9" stroke="#0bb2d4" stroke-width="2" rx="2"/>
+  <text x="305" y="248" fill="#0bb2d4" font-size="10">SOAP</text>
+  <circle cx="340" cy="245" r="8" fill="#3fc1ff" opacity="0.6"/>
+  <rect x="335" y="253" width="10" height="20" fill="#5d4e37"/>
+</svg>

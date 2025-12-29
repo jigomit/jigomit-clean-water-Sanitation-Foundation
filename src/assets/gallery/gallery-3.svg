@@ -1,0 +1,18 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Children learning hygiene practices">
+  <defs>
+    <linearGradient id="g3-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e4fbff"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g3-bg)"/>
+  <circle cx="140" cy="90" r="55" fill="#abf0ff" opacity="0.5"/>
+  <circle cx="470" cy="110" r="35" fill="#d8fff2" opacity="0.9"/>
+  <rect x="140" y="160" width="320" height="160" rx="20" fill="#0fb5ba" opacity="0.18"/>
+  <rect x="160" y="180" width="280" height="120" rx="18" fill="#ffffff" stroke="#a1e6ff" stroke-width="4"/>
+  <path d="M180 235 h60 v-40" stroke="#24a0ed" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="240" cy="215" r="14" fill="#24a0ed"/>
+  <path d="M260 255 h110" stroke="#9bd9ff" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="410" cy="205" r="16" fill="#58c4dd"/>
+  <circle cx="430" cy="245" r="10" fill="#85e0a3"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Village sanitation planning">
+  <defs>
+    <linearGradient id="g4-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3fff2"/>
+      <stop offset="100%" stop-color="#d5ffe8"/>
+    </linearGradient>
+    <linearGradient id="g4-line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#59c9a5"/>
+      <stop offset="100%" stop-color="#2b9cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g4-bg)"/>
+  <rect x="110" y="100" width="380" height="220" rx="24" fill="#ffffff" stroke="#a7f1d1" stroke-width="5"/>
+  <path d="M160 160 h280" stroke="url(#g4-line)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M160 210 h220" stroke="#56c7f1" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="240" cy="275" r="35" fill="#2da6ff" opacity="0.15"/>
+  <circle cx="240" cy="275" r="14" fill="#0f9d58"/>
+  <path d="M380 240 q20 -30 60 -25" stroke="#38c7d1" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="440" cy="215" r="12" fill="#38c7d1"/>
+  <circle cx="150" cy="130" r="12" fill="#8ce7ff"/>
+  <circle cx="450" cy="130" r="18" fill="#96ffd0"/>
+</svg>

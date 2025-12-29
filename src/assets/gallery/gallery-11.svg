@@ -1,0 +1,31 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Latrine construction">
+  <defs>
+    <linearGradient id="g11-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a8d8ea"/>
+      <stop offset="100%" stop-color="#d4f1f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g11-sky)"/>
+  <!-- Ground -->
+  <rect y="280" width="600" height="120" fill="#b8a890"/>
+  <!-- Latrine structure being built -->
+  <rect x="250" y="160" width="100" height="140" fill="#8b7355" stroke="#5d4e37" stroke-width="4" rx="4"/>
+  <!-- Door -->
+  <rect x="275" y="220" width="50" height="80" fill="#5d4e37" rx="3"/>
+  <circle cx="315" cy="260" r="4" fill="#f4fff9"/>
+  <!-- Roof -->
+  <path d="M240 160 L300 120 L360 160 Z" fill="#1b4e80"/>
+  <!-- Vent pipe -->
+  <rect x="330" y="90" width="15" height="80" fill="#0fa3b1" rx="2"/>
+  <circle cx="337.5" cy="85" r="10" fill="#0fa3b1"/>
+  <!-- Worker -->
+  <circle cx="420" cy="240" r="20" fill="#f39c6b"/>
+  <rect x="405" y="260" width="30" height="45" fill="#49d391" rx="4"/>
+  <line x1="390" y1="275" x2="360" y2="245" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+  <!-- Tools -->
+  <rect x="150" y="260" width="60" height="8" fill="#8a7a60" rx="2"/>
+  <rect x="165" y="250" width="8" height="30" fill="#1b4e80"/>
+  <!-- Building materials (bricks) -->
+  <rect x="480" y="270" width="30" height="15" fill="#a04000" stroke="#5d4e37" stroke-width="2"/>
+  <rect x="485" y="255" width="30" height="15" fill="#a04000" stroke="#5d4e37" stroke-width="2"/>
+</svg>

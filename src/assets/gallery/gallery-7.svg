@@ -1,0 +1,24 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Team training session">
+  <defs>
+    <linearGradient id="g7-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8f7ff"/>
+      <stop offset="100%" stop-color="#d4f1f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g7-bg)"/>
+  <!-- Ground -->
+  <rect y="300" width="600" height="100" fill="#c8e6d2"/>
+  <!-- Board/presentation -->
+  <rect x="80" y="80" width="200" height="140" fill="#1b4e80" rx="8"/>
+  <rect x="100" y="100" width="160" height="100" fill="#f4fff9"/>
+  <circle cx="140" cy="135" r="15" fill="#0bb2d4"/>
+  <line x1="180" y1="130" x2="240" y2="130" stroke="#0bb2d4" stroke-width="4"/>
+  <line x1="180" y1="150" x2="230" y2="150" stroke="#49d391" stroke-width="4"/>
+  <!-- People sitting (simplified) -->
+  <circle cx="360" cy="240" r="20" fill="#f39c6b"/>
+  <rect x="345" y="260" width="30" height="40" fill="#0bb2d4" rx="4"/>
+  <circle cx="460" cy="240" r="20" fill="#f39c6b"/>
+  <rect x="445" y="260" width="30" height="40" fill="#49d391" rx="4"/>
+  <circle cx="410" cy="260" r="18" fill="#f39c6b"/>
+  <rect x="397" y="278" width="26" height="35" fill="#1b4e80" rx="4"/>
+</svg>

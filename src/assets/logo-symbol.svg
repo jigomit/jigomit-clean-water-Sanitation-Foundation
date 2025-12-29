@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-labelledby="title">
+  <title>LifeSpring Water Foundation emblem</title>
+  <defs>
+    <linearGradient id="dropletBody" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#66efff" />
+      <stop offset="55%" stop-color="#2cc4ff" />
+      <stop offset="100%" stop-color="#0d6ed8" />
+    </linearGradient>
+    <linearGradient id="crestWave" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#6af7b5" />
+      <stop offset="100%" stop-color="#1ea6ff" />
+    </linearGradient>
+    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#031629" flood-opacity="0.35" />
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <circle cx="36" cy="36" r="32" fill="#031323" opacity="0.45" />
+    <g filter="url(#badgeShadow)">
+      <path
+        d="M36 8c10.8 13.9 16.2 23.8 16.2 30.6 0 10.1-7.6 18.2-16.2 18.2S19.8 48.7 19.8 38.6C19.8 31.8 25.2 21.9 36 8Z"
+        fill="url(#dropletBody)"
+        stroke="rgba(255,255,255,0.85)"
+        stroke-width="2"
+      />
+      <path
+        d="M14 44c6.6 4.1 13.4 6.2 22 6.2s15.4-2.1 22-6.2v6.8c-6.6 4-13.4 6-22 6s-15.4-2-22-6Z"
+        fill="url(#crestWave)"
+        opacity="0.95"
+      />
+      <path
+        d="M21 46.5c5 2.6 10.5 3.9 17 3.9s12-1.3 17-3.9"
+        stroke="rgba(255,255,255,0.82)"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      />
+    </g>
+  </g>
+</svg>

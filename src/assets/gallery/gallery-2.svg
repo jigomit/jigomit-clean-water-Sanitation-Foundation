@@ -1,0 +1,20 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Water filtration system illustration">
+  <defs>
+    <linearGradient id="g2-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fffb"/>
+      <stop offset="100%" stop-color="#c0f3ff"/>
+    </linearGradient>
+    <linearGradient id="g2-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2ed1c2"/>
+      <stop offset="100%" stop-color="#2b7cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g2-bg)"/>
+  <rect x="210" y="80" width="180" height="240" rx="30" fill="#f7ffff" stroke="#9fe0ff" stroke-width="6"/>
+  <rect x="230" y="120" width="140" height="60" rx="20" fill="url(#g2-highlight)" opacity="0.8"/>
+  <rect x="230" y="210" width="140" height="30" rx="15" fill="#e0fbff"/>
+  <rect x="230" y="260" width="140" height="20" rx="10" fill="#d8ffe0"/>
+  <circle cx="300" cy="120" r="8" fill="#fff"/>
+  <circle cx="300" cy="210" r="6" fill="#36a2ff"/>
+  <path d="M120 320 Q180 300 240 315 T360 300 T520 310 L600 330 V400 H0 V340 Z" fill="#73d7ff" opacity="0.7"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spring protection project">
+  <defs>
+    <linearGradient id="g13-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a8e6cf"/>
+      <stop offset="100%" stop-color="#dcedc1"/>
+    </linearGradient>
+    <linearGradient id="g13-water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3fc1ff"/>
+      <stop offset="100%" stop-color="#0bb2d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g13-sky)"/>
+  <!-- Hills -->
+  <ellipse cx="150" cy="200" rx="120" ry="80" fill="#7fb685" opacity="0.7"/>
+  <ellipse cx="450" cy="220" rx="140" ry="90" fill="#6ba368" opacity="0.6"/>
+  <!-- Ground -->
+  <rect y="280" width="600" height="120" fill="#8fbc8f"/>
+  <!-- Spring box structure -->
+  <rect x="220" y="220" width="160" height="80" fill="#8b8b8b" rx="6"/>
+  <rect x="230" y="230" width="140" height="60" fill="#b8b8b8"/>
+  <!-- Protected spring opening -->
+  <rect x="280" y="240" width="40" height="30" fill="#1b4e80" rx="3"/>
+  <rect x="290" y="250" width="20" height="15" fill="url(#g13-water)"/>
+  <!-- Tap -->
+  <rect x="370" y="260" width="8" height="20" fill="#0fa3b1"/>
+  <rect x="365" y="270" width="18" height="8" fill="#0fa3b1" rx="2"/>
+  <!-- Water flowing -->
+  <path d="M373 278 Q373 290 375 300" stroke="#3fc1ff" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M373 278 Q370 290 368 300" stroke="#3fc1ff" stroke-width="2" fill="none" opacity="0.6"/>
+  <!-- Collection bucket -->
+  <rect x="360" y="295" width="30" height="25" fill="#f39c6b" rx="2"/>
+  <rect x="362" y="297" width="26" height="18" fill="#3fc1ff" opacity="0.5"/>
+  <!-- Person collecting water -->
+  <circle cx="460" cy="250" r="20" fill="#f39c6b"/>
+  <rect x="445" y="270" width="30" height="45" fill="#49d391" rx="4"/>
+  <!-- Trees -->
+  <circle cx="120" cy="260" r="25" fill="#4a7c59"/>
+  <rect x="115" y="285" width="10" height="30" fill="#5d4e37"/>
+  <circle cx="520" cy="270" r="30" fill="#5a8f6a"/>
+  <rect x="514" y="300" width="12" height="35" fill="#5d4e37"/>
+</svg>

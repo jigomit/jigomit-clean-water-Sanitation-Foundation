@@ -1,0 +1,23 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Water delivery truck arriving at village">
+  <defs>
+    <linearGradient id="g6-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b5f1ff"/>
+      <stop offset="100%" stop-color="#f8fffe"/>
+    </linearGradient>
+    <linearGradient id="g6-water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0fbad6"/>
+      <stop offset="100%" stop-color="#0f76d6"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g6-sky)"/>
+  <rect x="100" y="220" width="400" height="90" rx="45" fill="#ffffff" stroke="#87d6ff" stroke-width="6"/>
+  <rect x="160" y="200" width="220" height="70" rx="20" fill="#e3fff0"/>
+  <rect x="400" y="230" width="70" height="60" rx="12" fill="#0ea3c6"/>
+  <circle cx="190" cy="320" r="35" fill="#1d7dd7"/>
+  <circle cx="190" cy="320" r="18" fill="#ffffff"/>
+  <circle cx="410" cy="320" r="35" fill="#1d7dd7"/>
+  <circle cx="410" cy="320" r="18" fill="#ffffff"/>
+  <path d="M0 300 Q150 260 300 290 T600 280 V400 H0Z" fill="url(#g6-water)" opacity="0.35"/>
+  <circle cx="120" cy="120" r="25" fill="#fef3b0"/>
+  <circle cx="470" cy="100" r="12" fill="#ffffff" opacity="0.8"/>
+</svg>
