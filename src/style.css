@@ -77,9 +77,28 @@ a {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 3px solid #69d7ff;
   outline-offset: 4px;
+  outline-style: solid;
+  /* Accessibility: Ensure focus indicators meet WCAG contrast requirements */
+  border-radius: 2px;
+}
+
+/* Accessibility: Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 #app {
@@ -263,6 +282,15 @@ button:focus-visible {
   font-weight: 600;
 }
 
+/* Accessibility: Ensure all buttons meet WCAG 2.5.5 Target Size (44x44px minimum) */
+.btn,
+.btn-modern,
+.btn-ngo,
+button {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -279,6 +307,7 @@ button:focus-visible {
   position: relative;
   overflow: hidden;
   min-height: 44px;
+  min-width: 44px; /* WCAG 2.5.5 Target Size */
   isolation: isolate;
 }
 
@@ -4456,6 +4485,19 @@ main {
   font-size: 1.1rem;
 }
 
+/* Accessibility: Disabled button styles for all button types */
+.btn:disabled,
+.btn-modern:disabled,
+.btn-ngo:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(15, 53, 88, 0.2) !important;
+  color: rgba(15, 53, 88, 0.5) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /* Mission Section */
 .fullscreen-section--mission {
@@ -5701,7 +5743,8 @@ main {
   gap: 0.5rem;
   border-radius: 999px;
   padding: 1rem 2.5rem;
-  min-height: 48px;
+  min-height: 48px; /* Already meets WCAG 2.5.5 */
+  min-width: 44px; /* Ensure minimum width */
   font-weight: 600;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   border: none;
@@ -8491,6 +8534,19 @@ main {
   font-size: 1.1rem;
 }
 
+/* Accessibility: Disabled button styles for all button types */
+.btn:disabled,
+.btn-modern:disabled,
+.btn-ngo:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(15, 53, 88, 0.2) !important;
+  color: rgba(15, 53, 88, 0.5) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /* Mission Section */
 .fullscreen-section--mission {
@@ -11456,6 +11512,19 @@ main {
   font-size: 1.1rem;
 }
 
+/* Accessibility: Disabled button styles for all button types */
+.btn:disabled,
+.btn-modern:disabled,
+.btn-ngo:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(15, 53, 88, 0.2) !important;
+  color: rgba(15, 53, 88, 0.5) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /* Mission Section */
 .fullscreen-section--mission {
@@ -14408,6 +14477,19 @@ main {
   font-size: 1.1rem;
 }
 
+/* Accessibility: Disabled button styles for all button types */
+.btn:disabled,
+.btn-modern:disabled,
+.btn-ngo:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(15, 53, 88, 0.2) !important;
+  color: rgba(15, 53, 88, 0.5) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /* Mission Section */
 .fullscreen-section--mission {

@@ -80,13 +80,13 @@ useReveal()
 
           <!-- Call-to-Action Buttons -->
           <div class="hero-ngo__actions">
-            <a href="/donate" class="btn-ngo btn-ngo--primary">
+            <a href="/donate" class="btn-ngo btn-ngo--primary" aria-label="Donate now to support clean water initiatives">
               <span>Donate Now</span>
-              <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M10 3C10 3 4 6.5 4 10.5C4 13.5 6.5 16 10 16C13.5 16 16 13.5 16 10.5C16 6.5 10 3 10 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
-            <a href="/about" class="btn-ngo btn-ngo--secondary">
+            <a href="/about" class="btn-ngo btn-ngo--secondary" aria-label="Learn more about getting involved">
               <span>Get Involved</span>
             </a>
           </div>

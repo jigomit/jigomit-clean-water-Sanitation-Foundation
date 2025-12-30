@@ -11,10 +11,10 @@
           </p>
         </div>
         <div class="cta__actions">
-          <a class="btn" href="mailto:hello@lifespringwater.org?subject=LifeSpring%20Water%20Donation">
+          <a class="btn" href="mailto:hello@lifespringwater.org?subject=LifeSpring%20Water%20Donation" aria-label="Email us to set up monthly donations">
             <span>Give monthly</span>
           </a>
-          <a class="btn btn--ghost" href="mailto:hello@lifespringwater.org?subject=Volunteer%20Inquiry">
+          <a class="btn btn--ghost" href="mailto:hello@lifespringwater.org?subject=Volunteer%20Inquiry" aria-label="Email us to partner with LifeSpring Water Foundation">
             <span>Partner with us</span>
           </a>
         </div>

@@ -39,10 +39,10 @@ useReveal()
 
         <!-- Desktop Navigation -->
         <nav class="site-nav site-nav--desktop" aria-label="Primary navigation">
-          <RouterLink v-for="link in navLinks" :key="link.to" class="site-nav__link" :to="link.to">
+          <RouterLink v-for="link in navLinks" :key="link.to" class="site-nav__link" :to="link.to" :aria-label="`Navigate to ${link.label} page`">
             {{ link.label }}
           </RouterLink>
-          <RouterLink class="btn btn--small" to="/donate">
+          <RouterLink class="btn btn--small" to="/donate" aria-label="Navigate to donation page">
             <span>Donate</span>
           </RouterLink>
         </nav>
@@ -75,6 +75,7 @@ useReveal()
             :key="link.to"
             class="mobile-nav__link"
             :to="link.to"
+            :aria-label="`Navigate to ${link.label} page`"
             @click="closeMobileMenu"
           >
             {{ link.label }}
@@ -82,6 +83,7 @@ useReveal()
           <RouterLink
             class="btn-modern btn-modern--primary mobile-nav__donate"
             to="/donate"
+            aria-label="Navigate to donation page"
             @click="closeMobileMenu"
           >
             <span>Donate</span>

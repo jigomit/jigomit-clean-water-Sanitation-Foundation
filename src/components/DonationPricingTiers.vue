@@ -128,7 +128,7 @@ const handleDonate = () => {
             <p>You will receive a confirmation email shortly with details about your donation and how to track your impact.</p>
             <p>100% of your donation goes directly to the field to support our water, sanitation, and hygiene programs.</p>
           </div>
-          <button class="btn-modern btn-modern--primary btn-modern--large" @click="isSubmitted = false">
+          <button class="btn-modern btn-modern--primary btn-modern--large" @click="isSubmitted = false" aria-label="Make another donation">
             <span>Make Another Donation</span>
           </button>
         </div>
@@ -181,6 +181,8 @@ const handleDonate = () => {
               class="tier-button"
               :class="{ 'tier-button--selected': selectedTier === tier.id }"
               @click.stop="selectTier(tier)"
+              :aria-label="selectedTier === tier.id ? `Selected: ${tier.name} tier` : `Select ${tier.name} tier`"
+              :aria-pressed="selectedTier === tier.id"
             >
               {{ selectedTier === tier.id ? 'Selected' : 'Select' }}
             </button>
@@ -193,12 +195,15 @@ const handleDonate = () => {
           <h3 class="custom-amount-title">Or Enter Custom Amount</h3>
           <div class="custom-amount-input-group">
             <span class="custom-amount-currency">$</span>
+            <label for="custom-amount-input" class="sr-only">Enter custom donation amount in dollars</label>
             <input
+              id="custom-amount-input"
               v-model="customAmount"
               type="number"
               min="5"
               placeholder="Enter amount"
               class="custom-amount-input"
+              aria-label="Enter custom donation amount in dollars"
               @focus="selectedTier = null"
             />
           </div>
@@ -211,10 +216,12 @@ const handleDonate = () => {
           class="btn-modern btn-modern--primary btn-modern--large"
           @click="handleDonate"
           :disabled="!customAmount && !selectedTier"
+          :aria-label="!customAmount && !selectedTier ? 'Please select a donation tier or enter a custom amount' : 'Continue to secure donation'"
+          aria-describedby="pricing-security"
         >
           <span>Continue to Secure Donation</span>
         </button>
-        <p class="pricing-security">
+        <p id="pricing-security" class="pricing-security">
           🔒 Secure payment • 100% goes to the field • Tax-deductible
         </p>
       </div>
