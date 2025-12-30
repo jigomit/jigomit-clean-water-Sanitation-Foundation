@@ -73,8 +73,8 @@ export default defineConfig(async () => {
     },
     // Enable compression
     reportCompressedSize: true,
-    // Reduce chunk size for better caching
-    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
+    // Performance: Optimize asset handling - reduce inline limit for better code splitting
+    assetsInlineLimit: 2048, // Inline assets smaller than 2kb (reduced from 4kb)
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
@@ -126,8 +126,12 @@ export default defineConfig(async () => {
     css: {
       devSourcemap: false,
     },
-    // Target modern browsers for smaller bundles
+    // Performance: Target modern browsers for smaller bundles
     target: ['es2015', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    // Performance: Optimize module resolution
+    modulePreload: {
+      polyfill: false, // Modern browsers support modulepreload natively
+    },
     // Improve tree shaking
     treeshake: {
       moduleSideEffects: false,

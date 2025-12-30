@@ -57,15 +57,16 @@
     <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Performance: Preload critical logo -->
+    <!-- Performance: Preload critical logo (LCP candidate) -->
     <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high" />
     
     <!-- Performance: Preconnect to improve connection time (invisible) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Performance: Preload critical resources -->
-    <link rel="modulepreload" href="/src/main.js" />
+    <!-- Performance: DNS prefetch for external resources (invisible) -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />
