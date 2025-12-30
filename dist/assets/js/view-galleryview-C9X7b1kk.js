@@ -1,0 +1,1 @@
+import{_ as e}from"./component-gallerygrid-C_QwVTTk.js";import{c as s,s as t,o as a}from"./vue-vendor-XXjwFxgx.js";import"./component-educationsection-Cp144-2I.js";const o={class:"view-stack"},p={__name:"GalleryView",setup(c){return(r,_)=>(a(),s("div",o,[t(e)]))}};export{p as default};

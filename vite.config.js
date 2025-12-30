@@ -25,14 +25,20 @@ export default defineConfig(async () => {
           viteCompression({
             algorithm: 'gzip',
             ext: '.gz',
-            threshold: 1024, // Only compress files > 1kb
+            threshold: 256, // Compress files > 256 bytes (very aggressive for PageSpeed)
             deleteOriginFile: false,
+            compressionOptions: {
+              level: 9, // Maximum compression
+            },
           }),
           viteCompression({
             algorithm: 'brotliCompress',
             ext: '.br',
-            threshold: 1024,
+            threshold: 256, // Compress files > 256 bytes (very aggressive for PageSpeed)
             deleteOriginFile: false,
+            compressionOptions: {
+              level: 11, // Maximum Brotli compression
+            },
           }),
         ]
       : []),
@@ -74,11 +80,12 @@ export default defineConfig(async () => {
     // Enable compression
     reportCompressedSize: true,
     // Performance: Optimize asset handling - reduce inline limit for better code splitting
-    assetsInlineLimit: 2048, // Inline assets smaller than 2kb (reduced from 4kb)
+    assetsInlineLimit: 1024, // Inline assets smaller than 1kb (aggressive splitting for PageSpeed)
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
         manualChunks: (id) => {
+          // Performance: Aggressive chunk splitting for PageSpeed optimization
           // Separate vendor chunks for better caching
           if (id.includes('node_modules')) {
             if (id.includes('vue')) {
@@ -89,11 +96,18 @@ export default defineConfig(async () => {
             }
             return 'vendor'
           }
-          // Split large view components for better code splitting
+          // Split ALL view components for better code splitting (including HomeView)
           if (id.includes('/views/')) {
             const viewName = id.split('/views/')[1].split('.')[0]
-            if (viewName && viewName !== 'HomeView') {
+            if (viewName) {
               return `view-${viewName.toLowerCase()}`
+            }
+          }
+          // Split large component chunks
+          if (id.includes('/components/') && !id.includes('node_modules')) {
+            const componentName = id.split('/components/')[1]?.split('.')[0]
+            if (componentName && componentName.length > 10) {
+              return `component-${componentName.toLowerCase()}`
             }
           }
         },
@@ -116,8 +130,8 @@ export default defineConfig(async () => {
         },
       },
     },
-    // Optimize chunk size warning limit
-    chunkSizeWarningLimit: 500,
+    // Performance: Stricter chunk size limit for PageSpeed optimization
+    chunkSizeWarningLimit: 300, // Reduced for better initial load performance
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
@@ -126,8 +140,8 @@ export default defineConfig(async () => {
     css: {
       devSourcemap: false,
     },
-    // Performance: Target modern browsers for smaller bundles
-    target: ['es2015', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    // Performance: Target modern browsers for smaller bundles (optimized for PageSpeed)
+    target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'], // ES2020 for better tree shaking
     // Performance: Optimize module resolution
     modulePreload: {
       polyfill: false, // Modern browsers support modulepreload natively

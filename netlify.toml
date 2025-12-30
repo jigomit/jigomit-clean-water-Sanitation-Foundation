@@ -57,3 +57,17 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Performance: Security headers (also help with performance)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Performance: Optimize font loading (if fonts are used)
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
