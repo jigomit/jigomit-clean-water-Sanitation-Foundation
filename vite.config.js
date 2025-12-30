@@ -25,20 +25,14 @@ export default defineConfig(async () => {
           viteCompression({
             algorithm: 'gzip',
             ext: '.gz',
-            threshold: 512, // Compress files > 512 bytes (more aggressive)
+            threshold: 1024, // Only compress files > 1kb
             deleteOriginFile: false,
-            compressionOptions: {
-              level: 9, // Maximum compression
-            },
           }),
           viteCompression({
             algorithm: 'brotliCompress',
             ext: '.br',
-            threshold: 512, // Compress files > 512 bytes (more aggressive)
+            threshold: 1024,
             deleteOriginFile: false,
-            compressionOptions: {
-              level: 11, // Maximum Brotli compression
-            },
           }),
         ]
       : []),
@@ -122,8 +116,8 @@ export default defineConfig(async () => {
         },
       },
     },
-    // Performance: Optimize chunk size warning limit (reduced for stricter optimization)
-    chunkSizeWarningLimit: 400,
+    // Optimize chunk size warning limit
+    chunkSizeWarningLimit: 500,
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
