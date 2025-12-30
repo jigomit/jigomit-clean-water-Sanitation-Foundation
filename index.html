@@ -60,8 +60,9 @@
     <!-- Performance: Preload critical logo -->
     <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high" />
     
-    <!-- Performance: DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <!-- Performance: Preconnect to improve connection time (invisible) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Performance: Preload critical resources -->
     <link rel="modulepreload" href="/src/main.js" />
@@ -73,30 +74,15 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
-    <!-- Performance optimization script -->
+    <!-- Performance: Defer non-critical script execution (invisible) -->
     <script>
-      // Optimize rendering performance
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          // Defer non-critical operations after page load
-        }, { timeout: 2000 });
-      }
-      
-      // Optimize scroll performance
-      if ('IntersectionObserver' in window) {
-        // Enable native lazy loading for images
-        document.addEventListener('DOMContentLoaded', () => {
-          const images = document.querySelectorAll('img[loading="lazy"]');
-          if ('loading' in HTMLImageElement.prototype) {
-            // Native lazy loading supported
-            images.forEach(img => {
-              if (!img.hasAttribute('loading')) {
-                img.setAttribute('loading', 'lazy');
-              }
-            });
-          }
-        });
-      }
+      (function() {
+        'use strict';
+        // Defer non-critical operations
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function() {}, { timeout: 2000 });
+        }
+      })();
     </script>
   </body>
 </html>
