@@ -68,8 +68,11 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     
-    <!-- Performance: Preload critical CSS to reduce render-blocking (invisible) -->
-    <!-- Vite will inject the actual CSS file path during build -->
+    <!-- Performance: Preconnect to Netlify CDN for faster asset delivery (Desktop optimization) -->
+    <link rel="preconnect" href="https://jigomit-clean-water-saniatation.netlify.app" />
+    
+    <!-- Performance: Preload critical JavaScript for faster LCP (Desktop optimization) -->
+    <!-- Vite will inject modulepreload hints during build -->
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />

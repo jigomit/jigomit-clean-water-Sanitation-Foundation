@@ -82,8 +82,8 @@ export default defineConfig(async () => {
     },
     // Enable compression
     reportCompressedSize: true,
-    // Performance: Optimize asset handling - reduce inline limit for better code splitting
-    assetsInlineLimit: 1024, // Inline assets smaller than 1kb (aggressive splitting for PageSpeed)
+    // Performance: Optimize asset handling - reduce inline limit for Desktop 95%+ optimization
+    assetsInlineLimit: 512, // Inline assets smaller than 512 bytes (very aggressive for Desktop)
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
@@ -133,8 +133,8 @@ export default defineConfig(async () => {
         },
       },
     },
-    // Performance: Stricter chunk size limit for PageSpeed optimization
-    chunkSizeWarningLimit: 300, // Reduced for better initial load performance
+    // Performance: Stricter chunk size limit for Desktop 95%+ optimization
+    chunkSizeWarningLimit: 250, // Very strict for optimal Desktop performance
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
@@ -143,11 +143,15 @@ export default defineConfig(async () => {
     css: {
       devSourcemap: false,
     },
-    // Performance: Target modern browsers for smaller bundles (optimized for PageSpeed)
-    target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'], // ES2020 for better tree shaking
-    // Performance: Optimize module resolution
+    // Performance: Target modern browsers for Desktop 95%+ optimization
+    target: ['es2022', 'edge88', 'firefox78', 'chrome87', 'safari14'], // ES2022 for maximum optimization
+    // Performance: Optimize module resolution for Desktop 95%+
     modulePreload: {
       polyfill: false, // Modern browsers support modulepreload natively
+      resolveDependencies: (filename, deps) => {
+        // Preload all dependencies for faster Desktop loading
+        return deps
+      },
     },
     // Improve tree shaking
     treeshake: {

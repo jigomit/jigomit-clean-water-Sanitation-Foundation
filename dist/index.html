@@ -68,8 +68,11 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     
-    <!-- Performance: Preload critical CSS to reduce render-blocking (invisible) -->
-    <!-- Vite will inject the actual CSS file path during build -->
+    <!-- Performance: Preconnect to Netlify CDN for faster asset delivery (Desktop optimization) -->
+    <link rel="preconnect" href="https://jigomit-clean-water-saniatation.netlify.app" />
+    
+    <!-- Performance: Preload critical JavaScript for faster LCP (Desktop optimization) -->
+    <!-- Vite will inject modulepreload hints during build -->
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />
@@ -80,7 +83,8 @@
     <link rel="modulepreload" crossorigin href="/assets/js/component-aboutsection-Dym-uG0M.js">
     <link rel="modulepreload" crossorigin href="/assets/js/component-lazysection-D9WJNVkm.js">
     <link rel="modulepreload" crossorigin href="/assets/js/view-homeview-DvIooDJg.js">
-    <link rel="stylesheet" crossorigin href="/assets/css/component-lazysection-BhgHmU4s.css">
+        <link rel="preload" href="/assets/css/component-lazysection-BhgHmU4s.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/css/component-lazysection-BhgHmU4s.css" crossorigin></noscript>
         <link rel="preload" href="/assets/css/index-Cug45Taz.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/assets/css/index-Cug45Taz.css" crossorigin></noscript>
   
