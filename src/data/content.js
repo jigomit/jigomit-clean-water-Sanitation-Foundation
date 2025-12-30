@@ -1,17 +1,4 @@
-import dawnWellImg from '@/assets/gallery/photos/dawn-well-calibrations.jpg'
-import filtrationBanksImg from '@/assets/gallery/photos/compact-filtration-banks.jpg'
-import hygieneLessonImg from '@/assets/gallery/photos/hygiene-lesson-students.jpg'
-import latrineUpgradesImg from '@/assets/gallery/photos/latrine-upgrades-residents.jpg'
-import mobileLabImg from '@/assets/gallery/photos/mobile-lab-filtration.jpg'
-import educatorsTrainingImg from '@/assets/gallery/photos/hygiene-educators-training.jpg'
-import waterDeliveryImg from '@/assets/gallery/photos/water-delivery-storage.jpg'
-import solarPumpImg from '@/assets/gallery/photos/solar-pump-array.jpg'
-import labTestingImg from '@/assets/gallery/photos/lab-testing-who.jpg'
-import schoolProgramImg from '@/assets/gallery/photos/school-handwashing-program.jpg'
-import vipLatrineImg from '@/assets/gallery/photos/vip-latrine-construction.jpg'
-import biogasSystemImg from '@/assets/gallery/photos/biogas-system.jpg'
-import protectedSpringImg from '@/assets/gallery/photos/protected-spring-gravity.jpg'
-import villagePlanningImg from '@/assets/gallery/photos/village-leaders-planning.jpg'
+// Shared content constants used across multiple views.
 
 export const heroHighlights = [
   {
@@ -168,93 +155,6 @@ export const impactStats = [
     suffix: ' partner labs',
     label: 'Quality audits',
     description: 'Regional labs validating samples quarterly against WHO standards',
-  },
-]
-
-export const galleryImages = [
-  {
-    src: dawnWellImg,
-    alt: 'Technicians calibrate a solar-assisted well at sunrise in Lura.',
-    caption: 'Dawn well calibrations in Lura',
-    meta: 'Telemetry crew primes the dawn shift in Lura.',
-  },
-  {
-    src: filtrationBanksImg,
-    alt: 'Compact filtration units staged for a community install.',
-    caption: 'Compact filtration banks ready for install',
-    meta: 'Modular carbon-sand banks staged for deployment.',
-  },
-  {
-    src: hygieneLessonImg,
-    alt: 'Student leaders gather outdoors for a hygiene lesson.',
-    caption: 'Hygiene lesson with student leaders',
-    meta: 'Student leaders co-teach hygiene drills.',
-  },
-  {
-    src: latrineUpgradesImg,
-    alt: 'Residents gather around a plan to map latrine upgrades.',
-    caption: 'Mapping latrine upgrades with residents',
-    meta: 'Co-design workshop prioritizes next latrine upgrades.',
-  },
-  {
-    src: mobileLabImg,
-    alt: 'Technician validates filtration quality inside a mobile lab.',
-    caption: 'Mobile lab validating filtration quality',
-    meta: 'QA mobile lab signs off WHO compliance.',
-  },
-  {
-    src: educatorsTrainingImg,
-    alt: 'Hygiene educators collaborate during a technical training.',
-    caption: 'Hygiene educators in technical training workshop',
-    meta: 'Educators review pump diagrams and lesson plans.',
-  },
-  {
-    src: waterDeliveryImg,
-    alt: 'Team unloads pipework for a new water delivery link.',
-    caption: 'Water delivery link boosting storage',
-    meta: 'Distribution link increases downstream storage.',
-  },
-  {
-    src: solarPumpImg,
-    alt: 'Solar array powers a deep-bore well next to a storage tower.',
-    caption: 'Solar pump array powering deep-bore well',
-    meta: '4kW solar field powers telemetry-enabled pump.',
-  },
-  {
-    src: labTestingImg,
-    alt: 'Technician analyzes a water sample during lab testing.',
-    caption: 'Lab testing ensuring WHO compliance standards',
-    meta: 'Lab validation confirms WHO compliance.',
-  },
-  {
-    src: schoolProgramImg,
-    alt: 'Students wash hands at a school hygiene station.',
-    caption: 'School-based handwashing behavior program',
-    meta: 'Behavior club demonstrates daily hygiene rituals.',
-  },
-  {
-    src: vipLatrineImg,
-    alt: 'Local team constructs a ventilated improved pit latrine.',
-    caption: 'VIP latrine construction with local team',
-    meta: 'Local masons assemble ventilated improved pit latrine.',
-  },
-  {
-    src: biogasSystemImg,
-    alt: 'Technicians inspect a biogas system converting waste to fuel.',
-    caption: 'Biogas system converting waste to cooking fuel',
-    meta: 'Biodigester dome channels waste into clean cooking fuel.',
-  },
-  {
-    src: protectedSpringImg,
-    alt: 'Protected spring feeds a gravity distribution system.',
-    caption: 'Protected spring with gravity-fed distribution',
-    meta: 'Spring box diverts flow into hillside storage.',
-  },
-  {
-    src: villagePlanningImg,
-    alt: 'Village leaders collaborate around a planning table.',
-    caption: 'Village leaders mapping sanitation improvements',
-    meta: 'Leaders align sanitation priorities for next build season.',
   },
 ]
 

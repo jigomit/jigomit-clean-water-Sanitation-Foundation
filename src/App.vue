@@ -2,20 +2,22 @@
 import SiteFooter from '@/components/SiteFooter.vue'
 import SiteLogo from '@/components/SiteLogo.vue'
 import { useReveal } from '@/composables/useReveal'
+import { useRoutePrefetch } from '@/composables/useRoutePrefetch'
 import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue'
 
 const navLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Projects', to: '/projects' },
-  { label: 'Hygiene', to: '/education' },
-  { label: 'Sanitation', to: '/sanitation' },
-  { label: 'Impact', to: '/impact' },
-  { label: 'Gallery', to: '/gallery' },
+  { label: 'Home', to: '/', name: 'home' },
+  { label: 'About', to: '/about', name: 'about' },
+  { label: 'Projects', to: '/projects', name: 'projects' },
+  { label: 'Hygiene', to: '/education', name: 'education' },
+  { label: 'Sanitation', to: '/sanitation', name: 'sanitation' },
+  { label: 'Impact', to: '/impact', name: 'impact' },
+  { label: 'Gallery', to: '/gallery', name: 'gallery' },
 ]
 
 const mobileMenuOpen = ref(false)
+const { prefetchRoute } = useRoutePrefetch()
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
@@ -23,6 +25,10 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   mobileMenuOpen.value = false
+}
+
+const handleRoutePrefetch = (routeName) => {
+  prefetchRoute(routeName)
 }
 
 useReveal()
@@ -39,10 +45,26 @@ useReveal()
 
         <!-- Desktop Navigation -->
         <nav class="site-nav site-nav--desktop" aria-label="Primary navigation">
-          <RouterLink v-for="link in navLinks" :key="link.to" class="site-nav__link" :to="link.to" :aria-label="`Navigate to ${link.label} page`">
+          <RouterLink
+            v-for="link in navLinks"
+            :key="link.to"
+            class="site-nav__link"
+            :to="link.to"
+            :aria-label="`Navigate to ${link.label} page`"
+            @mouseenter="handleRoutePrefetch(link.name)"
+            @focus="handleRoutePrefetch(link.name)"
+            @touchstart.passive="handleRoutePrefetch(link.name)"
+          >
             {{ link.label }}
           </RouterLink>
-          <RouterLink class="btn btn--small" to="/donate" aria-label="Navigate to donation page">
+          <RouterLink
+            class="btn btn--small"
+            to="/donate"
+            aria-label="Navigate to donation page"
+            @mouseenter="handleRoutePrefetch('donate')"
+            @focus="handleRoutePrefetch('donate')"
+            @touchstart.passive="handleRoutePrefetch('donate')"
+          >
             <span>Donate</span>
           </RouterLink>
         </nav>
@@ -80,6 +102,9 @@ useReveal()
             :to="link.to"
             :aria-label="`Navigate to ${link.label} page`"
             @click="closeMobileMenu"
+            @mouseenter="handleRoutePrefetch(link.name)"
+            @focus="handleRoutePrefetch(link.name)"
+            @touchstart.passive="handleRoutePrefetch(link.name)"
           >
             {{ link.label }}
           </RouterLink>
@@ -88,6 +113,9 @@ useReveal()
             to="/donate"
             aria-label="Navigate to donation page"
             @click="closeMobileMenu"
+            @mouseenter="handleRoutePrefetch('donate')"
+            @focus="handleRoutePrefetch('donate')"
+            @touchstart.passive="handleRoutePrefetch('donate')"
           >
             <span>Donate</span>
           </RouterLink>

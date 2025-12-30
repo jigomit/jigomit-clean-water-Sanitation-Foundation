@@ -1,5 +1,5 @@
 <script setup>
-import { galleryImages } from '@/data/content'
+import { galleryImages } from '@/data/gallery'
 </script>
 
 <template>
