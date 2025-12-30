@@ -81,6 +81,22 @@
           // Defer non-critical operations after page load
         }, { timeout: 2000 });
       }
+      
+      // Optimize scroll performance
+      if ('IntersectionObserver' in window) {
+        // Enable native lazy loading for images
+        document.addEventListener('DOMContentLoaded', () => {
+          const images = document.querySelectorAll('img[loading="lazy"]');
+          if ('loading' in HTMLImageElement.prototype) {
+            // Native lazy loading supported
+            images.forEach(img => {
+              if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+              }
+            });
+          }
+        });
+      }
     </script>
   </body>
 </html>
