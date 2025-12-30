@@ -4,8 +4,39 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue()],
+export default defineConfig(async () => {
+  // Import compression plugin (install with: npm install --save-dev vite-plugin-compression)
+  let viteCompression = null
+  try {
+    const compressionModule = await import('vite-plugin-compression')
+    viteCompression = compressionModule.default
+  } catch (e) {
+    // Plugin not installed - will skip compression (install for better performance)
+    // Silent fail - compression is optional
+  }
+
+  return {
+  plugins: [
+    vue(),
+    // Compression plugins for production (Gzip & Brotli)
+    // Only added if vite-plugin-compression is installed
+    ...(viteCompression
+      ? [
+          viteCompression({
+            algorithm: 'gzip',
+            ext: '.gz',
+            threshold: 1024, // Only compress files > 1kb
+            deleteOriginFile: false,
+          }),
+          viteCompression({
+            algorithm: 'brotliCompress',
+            ext: '.br',
+            threshold: 1024,
+            deleteOriginFile: false,
+          }),
+        ]
+      : []),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -85,13 +116,16 @@ export default defineConfig({
         },
       },
     },
-    // Increase chunk size warning limit
-    chunkSizeWarningLimit: 1000,
+    // Optimize chunk size warning limit
+    chunkSizeWarningLimit: 500,
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
     cssCodeSplit: true,
     cssMinify: true,
+    css: {
+      devSourcemap: false,
+    },
     // Target modern browsers for smaller bundles
     target: ['es2015', 'edge88', 'firefox78', 'chrome87', 'safari14'],
     // Improve tree shaking
@@ -99,8 +133,9 @@ export default defineConfig({
       moduleSideEffects: false,
     },
   },
-  // Image optimization
-  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg', '**/*.webp'],
-  // Clear cache on build
-  clearScreen: false,
+    // Image optimization
+    assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg', '**/*.webp'],
+    // Clear cache on build
+    clearScreen: false,
+  }
 })

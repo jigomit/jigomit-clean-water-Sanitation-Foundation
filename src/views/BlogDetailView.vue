@@ -129,6 +129,9 @@ watch(() => route.params.slug, () => {
             loading="eager"
             decoding="async"
             fetchpriority="high"
+            width="1200"
+            height="630"
+            style="aspect-ratio: 1.9/1;"
           />
         </div>
 

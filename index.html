@@ -57,9 +57,12 @@
     <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Preconnect for Performance (only if using external fonts) -->
-    <!-- Removed external font preconnects for better performance -->
-
+    <!-- Performance: Preload critical logo -->
+    <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high" />
+    
+    <!-- Performance: DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    
     <!-- Performance: Preload critical resources -->
     <link rel="modulepreload" href="/src/main.js" />
 

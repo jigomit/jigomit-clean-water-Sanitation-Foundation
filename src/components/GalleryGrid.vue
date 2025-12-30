@@ -12,9 +12,18 @@ import { galleryImages } from '@/data/content'
           <p>All visuals are crafted in-house to illustrate real field work without slowing the site with heavy media.</p>
         </div>
         <div class="gallery-grid">
-          <figure v-for="image in galleryImages" :key="image.caption" class="gallery-tile" data-reveal>
+          <figure v-for="(image, index) in galleryImages" :key="image.caption" class="gallery-tile" data-reveal>
             <div class="gallery-media">
-              <img :src="image.src" :alt="image.alt" loading="lazy" decoding="async" fetchpriority="low" />
+              <img 
+                :src="image.src" 
+                :alt="image.alt" 
+                loading="lazy" 
+                decoding="async" 
+                :fetchpriority="index < 2 ? 'high' : 'low'"
+                width="800"
+                height="600"
+                style="aspect-ratio: 4/3;"
+              />
             </div>
             <figcaption class="gallery-caption">
               <p class="gallery-caption__title">{{ image.caption }}</p>

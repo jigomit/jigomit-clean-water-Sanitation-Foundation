@@ -96,6 +96,9 @@ onMounted(() => {
                   loading="lazy"
                   decoding="async"
                   fetchpriority="low"
+                  width="600"
+                  height="400"
+                  style="aspect-ratio: 3/2;"
                 />
               </div>
               <div class="blog-card__content">
