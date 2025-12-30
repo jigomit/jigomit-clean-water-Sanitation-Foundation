@@ -194,6 +194,7 @@ onBeforeUnmount(() => {
           <!-- Navigation Arrows -->
           <button
             class="carousel-arrow carousel-arrow--prev"
+            type="button"
             @click="previousSlide"
             aria-label="Previous testimonial"
           >
@@ -201,6 +202,7 @@ onBeforeUnmount(() => {
           </button>
           <button
             class="carousel-arrow carousel-arrow--next"
+            type="button"
             @click="nextSlide"
             aria-label="Next testimonial"
           >
@@ -214,6 +216,7 @@ onBeforeUnmount(() => {
             v-for="(testimonial, index) in testimonials"
             :key="testimonial.id"
             class="carousel-dot"
+            type="button"
             :class="{ 'carousel-dot--active': currentSlide === index }"
             @click="goToSlide(index)"
             :aria-label="`Go to testimonial ${index + 1}`"
@@ -226,6 +229,7 @@ onBeforeUnmount(() => {
         <div class="carousel-controls">
           <button
             class="autoplay-toggle"
+            type="button"
             @click="isAutoPlaying ? pauseAutoPlay() : resumeAutoPlay()"
             :aria-label="isAutoPlaying ? 'Pause auto-play' : 'Resume auto-play'"
           >

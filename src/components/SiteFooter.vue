@@ -194,6 +194,7 @@ const handleNewsletterSubmit = () => {
             <!-- Newsletter Form View -->
             <form v-else @submit.prevent="handleNewsletterSubmit" class="footer-content__newsletter">
               <div class="footer-content__newsletter-input-group">
+                <label class="sr-only" for="newsletter-email">Email address</label>
                 <input
                   id="newsletter-email"
                   v-model="newsletterEmail"

@@ -128,7 +128,7 @@ const handleDonate = () => {
             <p>You will receive a confirmation email shortly with details about your donation and how to track your impact.</p>
             <p>100% of your donation goes directly to the field to support our water, sanitation, and hygiene programs.</p>
           </div>
-          <button class="btn-modern btn-modern--primary btn-modern--large" @click="isSubmitted = false" aria-label="Make another donation">
+          <button type="button" class="btn-modern btn-modern--primary btn-modern--large" @click="isSubmitted = false" aria-label="Make another donation">
             <span>Make Another Donation</span>
           </button>
         </div>
@@ -180,8 +180,9 @@ const handleDonate = () => {
             <button
               class="tier-button"
               :class="{ 'tier-button--selected': selectedTier === tier.id }"
+              type="button"
               @click.stop="selectTier(tier)"
-              :aria-label="selectedTier === tier.id ? `Selected: ${tier.name} tier` : `Select ${tier.name} tier`"
+              :aria-label="selectedTier === tier.id ? `Selected: ${tier.title} tier` : `Select ${tier.title} tier`"
               :aria-pressed="selectedTier === tier.id"
             >
               {{ selectedTier === tier.id ? 'Selected' : 'Select' }}
@@ -214,6 +215,7 @@ const handleDonate = () => {
       <div class="pricing-actions" data-reveal>
         <button
           class="btn-modern btn-modern--primary btn-modern--large"
+          type="button"
           @click="handleDonate"
           :disabled="!customAmount && !selectedTier"
           :aria-label="!customAmount && !selectedTier ? 'Please select a donation tier or enter a custom amount' : 'Continue to secure donation'"

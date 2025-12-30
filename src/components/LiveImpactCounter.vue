@@ -21,6 +21,7 @@ const baseValues = {
 const currentLiters = ref(baseValues.litersDelivered)
 const displayLiters = ref(baseValues.litersDelivered)
 let counterInterval = null
+let visibilityHandler = null
 
 // Animation reference for smooth counting
 const animateValue = (start, end, duration, callback) => {
@@ -60,6 +61,9 @@ const formatNumber = (num) => {
 // Start the live counter
 const startLiveCounter = () => {
   // Simulate real-time water delivery
+  if (counterInterval) {
+    return
+  }
   counterInterval = setInterval(() => {
     const increment = baseValues.litersPerSecond
     currentLiters.value += increment
@@ -111,11 +115,25 @@ const progressToNextWell = computed(() => {
 
 onMounted(() => {
   startLiveCounter()
+  visibilityHandler = () => {
+    if (document.hidden) {
+      if (counterInterval) {
+        clearInterval(counterInterval)
+        counterInterval = null
+      }
+    } else {
+      startLiveCounter()
+    }
+  }
+  document.addEventListener('visibilitychange', visibilityHandler)
 })
 
 onBeforeUnmount(() => {
   if (counterInterval) {
     clearInterval(counterInterval)
+  }
+  if (visibilityHandler) {
+    document.removeEventListener('visibilitychange', visibilityHandler)
   }
 })
 </script>

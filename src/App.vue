@@ -49,11 +49,13 @@ useReveal()
 
         <!-- Mobile Menu Button -->
         <button
+          type="button"
           class="mobile-menu-toggle"
           :class="{ 'mobile-menu-toggle--active': mobileMenuOpen }"
           @click="toggleMobileMenu"
           aria-label="Toggle mobile menu"
-          aria-expanded="mobileMenuOpen"
+          :aria-expanded="mobileMenuOpen"
+          aria-controls="mobile-navigation"
         >
           <span class="mobile-menu-toggle__line"></span>
           <span class="mobile-menu-toggle__line"></span>
@@ -67,6 +69,7 @@ useReveal()
       <nav
         v-if="mobileMenuOpen"
         class="mobile-nav"
+        id="mobile-navigation"
         aria-label="Mobile navigation"
       >
         <div class="mobile-nav__content">

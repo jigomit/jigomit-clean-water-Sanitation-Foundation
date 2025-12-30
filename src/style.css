@@ -17070,3 +17070,39 @@ button:disabled {
     gap: 1.5rem;
   }
 }
+
+/* Accessibility & Performance: respect reduced motion preferences to avoid forced animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .title-line,
+  .hero-ngo__subtitle,
+  .hero-ngo__impact,
+  .hero-water-waves svg,
+  .hero-droplets .droplet,
+  .hero-ripples .ripple,
+  .hero-shimmer,
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .mobile-menu-toggle,
+  .btn,
+  .btn-modern,
+  .btn-ngo,
+  .tier-card,
+  .carousel-slide,
+  .before-after-section,
+  .live-counter {
+    transition: none !important;
+  }
+}

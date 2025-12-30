@@ -138,6 +138,7 @@ const prevComparison = () => {
             :key="comparison.id"
             class="selector-button"
             :class="{ 'selector-button--active': currentComparison === index }"
+            type="button"
             @click="currentComparison = index; sliderPosition = 50"
           >
             <div class="selector-title">{{ comparison.title }}</div>
@@ -226,13 +227,13 @@ const prevComparison = () => {
 
           <!-- Navigation -->
           <div class="comparison-nav">
-            <button class="nav-button nav-button--prev" @click="prevComparison" aria-label="Previous comparison">
+            <button type="button" class="nav-button nav-button--prev" @click="prevComparison" aria-label="Previous comparison">
               ← Previous
             </button>
             <div class="nav-indicator">
               {{ currentComparison + 1 }} of {{ comparisons.length }}
             </div>
-            <button class="nav-button nav-button--next" @click="nextComparison" aria-label="Next comparison">
+            <button type="button" class="nav-button nav-button--next" @click="nextComparison" aria-label="Next comparison">
               Next →
             </button>
           </div>

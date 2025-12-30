@@ -1,9 +1,12 @@
 <script setup>
 import { heroHighlights, impactStats } from '@/data/content'
 import { useReveal } from '@/composables/useReveal'
-import LiveImpactCounter from '@/components/LiveImpactCounter.vue'
-import TestimonialsCarousel from '@/components/TestimonialsCarousel.vue'
-import BeforeAfterSlider from '@/components/BeforeAfterSlider.vue'
+import LazySection from '@/components/LazySection.vue'
+import { defineAsyncComponent } from 'vue'
+
+const LiveImpactCounter = defineAsyncComponent(() => import('@/components/LiveImpactCounter.vue'))
+const TestimonialsCarousel = defineAsyncComponent(() => import('@/components/TestimonialsCarousel.vue'))
+const BeforeAfterSlider = defineAsyncComponent(() => import('@/components/BeforeAfterSlider.vue'))
 
 useReveal()
 </script>
@@ -177,13 +180,19 @@ useReveal()
     </section>
 
     <!-- Live Impact Counter -->
-    <LiveImpactCounter />
+    <LazySection class="lazy-hydration" :min-height="520" root-margin="0px 0px 240px 0px">
+      <LiveImpactCounter />
+    </LazySection>
 
     <!-- Testimonials Section -->
-    <TestimonialsCarousel />
+    <LazySection class="lazy-hydration" :min-height="520" root-margin="0px 0px 200px 0px">
+      <TestimonialsCarousel />
+    </LazySection>
 
     <!-- Before/After Transformations -->
-    <BeforeAfterSlider />
+    <LazySection class="lazy-hydration" :min-height="520" root-margin="0px 0px 200px 0px">
+      <BeforeAfterSlider />
+    </LazySection>
 
     <!-- CTA Section -->
     <section id="cta" class="fullscreen-section fullscreen-section--cta">

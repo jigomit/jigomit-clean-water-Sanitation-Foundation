@@ -171,7 +171,7 @@ const handleDonate = () => {
             <p class="success-next">
               You will receive a confirmation email shortly with details about your donation and how to track your impact.
             </p>
-            <button class="btn-modern btn-modern--primary" @click="isSubmitted = false">
+            <button type="button" class="btn-modern btn-modern--primary" @click="isSubmitted = false">
               <span>Make Another Donation</span>
             </button>
           </div>
@@ -215,6 +215,7 @@ const handleDonate = () => {
                 :key="freq.id"
                 class="frequency-button"
                 :class="{ 'frequency-button--active': selectedFrequency === freq.id }"
+                type="button"
                 @click="selectedFrequency = freq.id"
               >
                 {{ freq.label }}
@@ -281,6 +282,7 @@ const handleDonate = () => {
           <div class="calculator-cta">
             <button
               class="btn-modern btn-modern--primary btn-modern--large"
+              type="button"
               @click="handleDonate"
             >
               <span>Donate ${{ donationAmount }} {{ selectedFrequency }}</span>
