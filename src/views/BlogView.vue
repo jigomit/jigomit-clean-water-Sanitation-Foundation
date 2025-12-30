@@ -94,6 +94,8 @@ onMounted(() => {
                   :alt="post.title"
                   class="blog-card__image"
                   loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                 />
               </div>
               <div class="blog-card__content">

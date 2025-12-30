@@ -127,6 +127,8 @@ watch(() => route.params.slug, () => {
             :alt="post.title"
             class="blog-detail__image"
             loading="eager"
+            decoding="async"
+            fetchpriority="high"
           />
         </div>
 

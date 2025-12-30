@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Performance hints -->
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
     <!-- Cache control (removed in production - handled by server) -->
 
     <!-- Primary Meta Tags -->
@@ -55,17 +57,11 @@
     <link rel="apple-touch-icon" href="/logo.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- DNS Prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <!-- Preconnect for Performance (only if using external fonts) -->
+    <!-- Removed external font preconnects for better performance -->
 
     <!-- Performance: Preload critical resources -->
-    <link rel="preload" href="/src/main.js" as="script" />
-    <link rel="preload" href="/src/style.css" as="style" />
+    <link rel="modulepreload" href="/src/main.js" />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />
@@ -74,5 +70,14 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <!-- Performance optimization script -->
+    <script>
+      // Optimize rendering performance
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          // Defer non-critical operations after page load
+        }, { timeout: 2000 });
+      }
+    </script>
   </body>
 </html>

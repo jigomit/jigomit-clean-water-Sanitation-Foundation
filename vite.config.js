@@ -11,6 +11,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['vue', 'vue-router'],
+    exclude: [],
+  },
   server: {
     // Disable caching in development
     headers: {
@@ -33,7 +38,12 @@ export default defineConfig({
     // Remove console and debugger in production
     esbuild: {
       drop: ['console', 'debugger'],
+      legalComments: 'none',
     },
+    // Enable compression
+    reportCompressedSize: true,
+    // Reduce chunk size for better caching
+    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
@@ -47,6 +57,13 @@ export default defineConfig({
               return 'router-vendor'
             }
             return 'vendor'
+          }
+          // Split large view components for better code splitting
+          if (id.includes('/views/')) {
+            const viewName = id.split('/views/')[1].split('.')[0]
+            if (viewName && viewName !== 'HomeView') {
+              return `view-${viewName.toLowerCase()}`
+            }
           }
         },
         // Optimize chunk file names
@@ -77,7 +94,13 @@ export default defineConfig({
     cssMinify: true,
     // Target modern browsers for smaller bundles
     target: ['es2015', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    // Improve tree shaking
+    treeshake: {
+      moduleSideEffects: false,
+    },
   },
+  // Image optimization
+  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg', '**/*.webp'],
   // Clear cache on build
   clearScreen: false,
 })
