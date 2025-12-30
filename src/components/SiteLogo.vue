@@ -34,6 +34,9 @@ const logoSrc = '/logo.png'
         decoding="async"
         loading="eager"
         fetchpriority="high"
+        width="56"
+        height="56"
+        style="aspect-ratio: 1/1;"
       />
     </span>
     <span class="site-logo__text">
