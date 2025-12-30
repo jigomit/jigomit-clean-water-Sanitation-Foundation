@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Performance hints -->
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <!-- Cache control (removed in production - handled by server) -->
 
     <!-- Primary Meta Tags -->
     <title>LifeSpring Water Foundation | Building Water Security with Local Leadership</title>
@@ -44,22 +47,59 @@
 
     <!-- Theme and Icons -->
     <meta name="theme-color" content="#0bb2d4" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="LifeSpring Foundation" />
-    <link rel="icon" type="image/png" href="data:," />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Performance: Preload critical logo -->
+    <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high" />
+    
+    <!-- Performance: DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    
+    <!-- Performance: Preload critical resources -->
+    <link rel="modulepreload" href="data:text/javascript;base64,aW1wb3J0IHsgY3JlYXRlQXBwIH0gZnJvbSAndnVlJwppbXBvcnQgQXBwIGZyb20gJy4vQXBwLnZ1ZScKaW1wb3J0IHJvdXRlciBmcm9tICcuL3JvdXRlcicKCi8vIExvYWQgQ1NTIC0gVml0ZSBoYW5kbGVzIGNvZGUgc3BsaXR0aW5nIGF1dG9tYXRpY2FsbHkKLy8gQ1NTIGlzIGxvYWRlZCBhc3luY2hyb25vdXNseSBpbiBwcm9kdWN0aW9uIGJ1aWxkcwppbXBvcnQgJy4vc3R5bGUuY3NzJwoKY29uc3QgYXBwID0gY3JlYXRlQXBwKEFwcCkKYXBwLnVzZShyb3V0ZXIpCmFwcC5tb3VudCgnI2FwcCcpCg==" />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
-    <script type="module" crossorigin src="/assets/index-BvAc5x_h.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dc5XXMTe.css">
+    <script type="module" crossorigin src="/assets/js/index-CvTIJ39n.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/js/vue-vendor-DGbgvkPS.js">
+    <link rel="modulepreload" crossorigin href="/assets/js/view-aboutview-DkitY6-6.js">
+    <link rel="stylesheet" crossorigin href="/assets/css/index-D47pYHCO.css">
   </head>
   <body>
     <div id="app"></div>
+    <!-- Performance optimization script -->
+    <script>
+      // Optimize rendering performance
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          // Defer non-critical operations after page load
+        }, { timeout: 2000 });
+      }
+      
+      // Optimize scroll performance
+      if ('IntersectionObserver' in window) {
+        // Enable native lazy loading for images
+        document.addEventListener('DOMContentLoaded', () => {
+          const images = document.querySelectorAll('img[loading="lazy"]');
+          if ('loading' in HTMLImageElement.prototype) {
+            // Native lazy loading supported
+            images.forEach(img => {
+              if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+              }
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
