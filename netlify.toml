@@ -57,3 +57,14 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Performance: Enable Brotli compression (Netlify handles this automatically, but we ensure it's configured)
+# Netlify automatically serves Brotli when available, Gzip as fallback
+
+# Performance: Security headers (also help with performance)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
