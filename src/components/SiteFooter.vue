@@ -24,7 +24,7 @@ const handleNewsletterSubmit = () => {
       <div class="footer-bar">
         <!-- Column 1: Our Programs -->
         <div class="footer-bar__column">
-          <h4 class="footer-bar__title">OUR PROGRAMS</h4>
+          <h3 class="footer-bar__title">OUR PROGRAMS</h3>
           <ul class="footer-bar__links">
             <li v-for="link in footerData.quickLinks.programs" :key="link.label">
               <RouterLink :to="link.to" class="footer-bar__link">{{ link.label }}</RouterLink>
@@ -34,7 +34,7 @@ const handleNewsletterSubmit = () => {
 
         <!-- Column 3: About Us -->
         <div class="footer-bar__column">
-          <h4 class="footer-bar__title">ABOUT US</h4>
+          <h3 class="footer-bar__title">ABOUT US</h3>
           <ul class="footer-bar__links">
             <li v-for="link in footerData.quickLinks.about" :key="link.label">
               <RouterLink :to="link.to" class="footer-bar__link">{{ link.label }}</RouterLink>
@@ -44,7 +44,7 @@ const handleNewsletterSubmit = () => {
 
         <!-- Column 4: Resources -->
         <div class="footer-bar__column">
-          <h4 class="footer-bar__title">RESOURCES</h4>
+          <h3 class="footer-bar__title">RESOURCES</h3>
           <ul class="footer-bar__links">
             <li v-for="link in footerData.quickLinks.resources" :key="link.label">
               <RouterLink :to="link.to" class="footer-bar__link">{{ link.label }}</RouterLink>
@@ -54,7 +54,7 @@ const handleNewsletterSubmit = () => {
 
         <!-- Column 5: Contact Us -->
         <div class="footer-bar__column">
-          <h4 class="footer-bar__title">CONTACT US</h4>
+          <h3 class="footer-bar__title">CONTACT US</h3>
           <div class="footer-bar__contact">
             <div class="footer-bar__contact-item">
               <span class="footer-bar__contact-icon">📧</span>
@@ -87,7 +87,7 @@ const handleNewsletterSubmit = () => {
 
         <!-- Column 6: Get Involved -->
         <div class="footer-bar__column">
-          <h4 class="footer-bar__title">GET INVOLVED</h4>
+          <h3 class="footer-bar__title">GET INVOLVED</h3>
           <ul class="footer-bar__links">
             <li v-for="link in footerData.quickLinks.getInvolved" :key="link.label">
               <RouterLink :to="link.to" class="footer-bar__link">{{ link.label }}</RouterLink>
@@ -124,18 +124,17 @@ const handleNewsletterSubmit = () => {
         <div class="footer-content__right">
           <!-- Stay Connected -->
           <div class="footer-content__social-section">
-            <h4 class="footer-content__section-title">STAY CONNECTED</h4>
-            <div class="footer-content__social" role="list">
-              <a
-                v-for="social in footerData.social"
-                :key="social.name"
-                :href="social.url"
-                :aria-label="social.name"
-                class="footer-content__social-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="footer-content__social-icon" aria-hidden="true">
+            <h3 class="footer-content__section-title">STAY CONNECTED</h3>
+            <ul class="footer-content__social" role="list">
+              <li v-for="social in footerData.social" :key="social.name" role="listitem">
+                <a
+                  :href="social.url"
+                  :aria-label="social.name"
+                  class="footer-content__social-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="footer-content__social-icon" aria-hidden="true">
                   <svg v-if="social.icon === 'twitter'" viewBox="0 0 24 24" role="img" focusable="false">
                     <path d="M4 3h4.2l3.7 5.3L15.7 3H20l-6.3 8.6 6.3 9.4h-4.3l-3.9-5.9L8.3 21H4l6.2-9.4z" fill="currentColor" />
                   </svg>
@@ -162,14 +161,15 @@ const handleNewsletterSubmit = () => {
                       fill="currentColor"
                     />
                   </svg>
-                </span>
-              </a>
-            </div>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
 
           <!-- Newsletter -->
           <div class="footer-content__newsletter-section">
-            <h4 class="footer-content__section-title">Newsletter</h4>
+            <h3 class="footer-content__section-title">Newsletter</h3>
             <!-- Newsletter Success View -->
             <div v-if="isNewsletterSubmitted" class="footer-content__newsletter footer-content__newsletter--success">
               <div class="footer-content__newsletter-success-content">
