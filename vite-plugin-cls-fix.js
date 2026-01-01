@@ -10,18 +10,31 @@ export default function clsFixPlugin() {
       
       // Performance: Fix CLS by reserving footer space (build-time injection, no source changes)
       // Uses permanent spacer that never removes to completely prevent CLS (0.916 mobile fix)
-      // Handles both first load and page reload scenarios
+      // Handles both first load and page reload scenarios - prevents footer from showing on reload
       const clsFixScript = `
     <!-- Performance: Fix CLS by reserving footer space (build-time injection, no source changes) -->
     <script>
       (function() {
         'use strict';
+        // CRITICAL: Hide footer initially to prevent it from showing on reload (build-time injection only)
+        // This is removed after Vue mounts - no visual change, just prevents flash
+        var hideFooterStyle = document.createElement('style');
+        hideFooterStyle.id = 'cls-footer-hide';
+        hideFooterStyle.textContent = '.site-footer { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; }';
+        document.head.appendChild(hideFooterStyle);
+        
         // Reserve space for footer immediately to prevent CLS (0.916 mobile, 0.889 desktop)
         // Runs synchronously before Vue mounts - PERMANENT spacer to prevent any shift
         // Handles both first load and page reload scenarios
         function createSpacer() {
           var app = document.getElementById('app');
-          if (!app) return;
+          if (!app) {
+            // Retry if app not ready (handles fast reloads)
+            if (document.readyState !== 'complete') {
+              setTimeout(createSpacer, 10);
+            }
+            return;
+          }
           
           // Check if spacer already exists (handles page reload)
           var existingSpacer = app.querySelector('[data-cls-spacer]');
@@ -53,12 +66,27 @@ export default function clsFixPlugin() {
             }
           }
           
+          // Show footer after spacer is created and Vue has mounted
+          function showFooter() {
+            var footer = document.querySelector('.site-footer');
+            var hideStyle = document.getElementById('cls-footer-hide');
+            if (footer && hideStyle) {
+              // Remove the hide style to show footer (Vue has mounted, spacer is ready)
+              hideStyle.remove();
+              // Ensure footer is visible
+              footer.style.visibility = '';
+              footer.style.opacity = '';
+              footer.style.position = '';
+              footer.style.left = '';
+            }
+          }
+          
           // Use ResizeObserver to dynamically update spacer to match actual footer
           // But NEVER remove the spacer to prevent any CLS
           if ('ResizeObserver' in window) {
             // Wait for Vue to mount and footer to render
             var observerAttempts = 0;
-            var maxObserverAttempts = 20; // 2 seconds at 100ms intervals
+            var maxObserverAttempts = 30; // 3 seconds at 100ms intervals
             var observerInterval = setInterval(function() {
               var footer = document.querySelector('.site-footer');
               if (footer) {
@@ -72,14 +100,20 @@ export default function clsFixPlugin() {
                       spacer.style.height = (height + 100) + 'px';
                     }
                   }
+                  // Show footer after it's rendered and sized
+                  showFooter();
                 });
                 ro.observe(footer);
                 // Initial update
                 updateSpacerHeight();
+                // Show footer after a short delay to ensure Vue has mounted
+                setTimeout(showFooter, 200);
               } else {
                 observerAttempts++;
                 if (observerAttempts >= maxObserverAttempts) {
                   clearInterval(observerInterval);
+                  // Fallback: show footer even if not detected
+                  setTimeout(showFooter, 500);
                 }
               }
             }, 100);
@@ -90,6 +124,10 @@ export default function clsFixPlugin() {
           var maxChecks = 100; // 5 seconds at 50ms intervals
           var checkInterval = setInterval(function() {
             updateSpacerHeight();
+            if (checkCount === 5) {
+              // Show footer after initial checks (Vue should be mounted)
+              showFooter();
+            }
             checkCount++;
             if (checkCount >= maxChecks) {
               clearInterval(checkInterval);
@@ -97,12 +135,15 @@ export default function clsFixPlugin() {
           }, 50);
         }
         
-        // Run immediately (handles first load)
+        // Run immediately (handles first load) - BLOCKING execution
         createSpacer();
         
         // Also run on DOMContentLoaded (handles page reload)
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', createSpacer);
+        } else {
+          // Document already loaded, run immediately
+          createSpacer();
         }
         
         // Also run when Vue might have already mounted (handles fast reloads)
