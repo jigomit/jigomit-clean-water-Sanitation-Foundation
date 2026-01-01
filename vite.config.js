@@ -137,7 +137,7 @@ export default defineConfig(async () => {
       },
     },
     // Performance: Stricter chunk size limit for 90%+ optimization
-    chunkSizeWarningLimit: 150, // Very strict for optimal 90%+ performance (reduced from 200)
+    chunkSizeWarningLimit: 100, // Very strict for optimal 90%+ performance (reduced from 150)
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
@@ -156,12 +156,17 @@ export default defineConfig(async () => {
       minifySyntax: true,
       minifyWhitespace: true,
     },
-    // Performance: Optimize module resolution for Desktop 95%+
+    // Performance: Optimize module resolution for 90%+ performance
     modulePreload: {
       polyfill: false, // Modern browsers support modulepreload natively
       resolveDependencies: (filename, deps) => {
-        // Preload all dependencies for faster Desktop loading
-        return deps
+        // Only preload critical dependencies (vue-vendor, index) for 90%+ performance
+        // Non-critical dependencies will load on-demand
+        return deps.filter(dep => 
+          dep.includes('vue-vendor') || 
+          dep.includes('index') ||
+          !dep.includes('component-') && !dep.includes('view-')
+        )
       },
     },
     // Improve tree shaking
