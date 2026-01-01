@@ -102,8 +102,19 @@
         'use strict';
         // Reserve space for footer immediately to prevent CLS (0.916 mobile, 0.889 desktop)
         // Runs synchronously before Vue mounts - PERMANENT spacer to prevent any shift
-        var app = document.getElementById('app');
-        if (app) {
+        // Handles both first load and page reload scenarios
+        function createSpacer() {
+          var app = document.getElementById('app');
+          if (!app) return;
+          
+          // Check if spacer already exists (handles page reload)
+          var existingSpacer = app.querySelector('[data-cls-spacer]');
+          if (existingSpacer) {
+            // Spacer already exists, just ensure it's properly sized
+            existingSpacer.style.cssText = 'min-height:1500px;height:1500px;display:block;visibility:hidden;pointer-events:none;width:100%;box-sizing:border-box;position:relative;z-index:-1;';
+            return;
+          }
+          
           // Create PERMANENT spacer that reserves footer space (prevents CLS completely)
           // This spacer never removes to ensure zero layout shift
           var spacer = document.createElement('div');
@@ -114,16 +125,32 @@
           spacer.style.cssText = 'min-height:1500px;height:1500px;display:block;visibility:hidden;pointer-events:none;width:100%;box-sizing:border-box;position:relative;z-index:-1;';
           app.appendChild(spacer);
           
+          // Function to update spacer height based on footer
+          function updateSpacerHeight() {
+            var footer = document.querySelector('.site-footer');
+            if (footer && spacer) {
+              var currentHeight = footer.offsetHeight;
+              if (currentHeight > 0) {
+                spacer.style.minHeight = (currentHeight + 100) + 'px';
+                spacer.style.height = (currentHeight + 100) + 'px';
+              }
+            }
+          }
+          
           // Use ResizeObserver to dynamically update spacer to match actual footer
           // But NEVER remove the spacer to prevent any CLS
           if ('ResizeObserver' in window) {
-            setTimeout(function() {
+            // Wait for Vue to mount and footer to render
+            var observerAttempts = 0;
+            var maxObserverAttempts = 20; // 2 seconds at 100ms intervals
+            var observerInterval = setInterval(function() {
               var footer = document.querySelector('.site-footer');
               if (footer) {
+                clearInterval(observerInterval);
                 var ro = new ResizeObserver(function(entries) {
                   for (var i = 0; i < entries.length; i++) {
                     var height = entries[i].contentRect.height;
-                    if (height > 0) {
+                    if (height > 0 && spacer) {
                       // Update spacer to match footer but keep it permanent
                       spacer.style.minHeight = (height + 100) + 'px';
                       spacer.style.height = (height + 100) + 'px';
@@ -131,6 +158,13 @@
                   }
                 });
                 ro.observe(footer);
+                // Initial update
+                updateSpacerHeight();
+              } else {
+                observerAttempts++;
+                if (observerAttempts >= maxObserverAttempts) {
+                  clearInterval(observerInterval);
+                }
               }
             }, 100);
           }
@@ -139,19 +173,25 @@
           var checkCount = 0;
           var maxChecks = 100; // 5 seconds at 50ms intervals
           var checkInterval = setInterval(function() {
-            var footer = document.querySelector('.site-footer');
-            if (footer) {
-              var currentHeight = footer.offsetHeight;
-              if (currentHeight > 0) {
-                spacer.style.minHeight = (currentHeight + 100) + 'px';
-                spacer.style.height = (currentHeight + 100) + 'px';
-              }
-            }
+            updateSpacerHeight();
             checkCount++;
             if (checkCount >= maxChecks) {
               clearInterval(checkInterval);
             }
           }, 50);
+        }
+        
+        // Run immediately (handles first load)
+        createSpacer();
+        
+        // Also run on DOMContentLoaded (handles page reload)
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', createSpacer);
+        }
+        
+        // Also run when Vue might have already mounted (handles fast reloads)
+        if (document.readyState === 'complete') {
+          setTimeout(createSpacer, 0);
         }
       })();
     </script>
