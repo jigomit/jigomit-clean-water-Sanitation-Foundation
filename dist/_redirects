@@ -1,0 +1,7 @@
+# SPA Routing: Redirect all routes to index.html for Vue Router
+# This fixes 404 errors on page reload and direct URL access
+# Netlify will serve this file from the dist folder after build
+
+# Redirect all non-file requests to index.html (status 200 = rewrite, not redirect)
+/*    /index.html   200
+

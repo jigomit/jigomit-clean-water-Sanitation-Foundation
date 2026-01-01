@@ -5,6 +5,17 @@
   command = "npm run build"
   publish = "dist"
 
+# SPA Routing: Redirect all routes to index.html for Vue Router (fixes 404 errors)
+# This allows client-side routing to work properly on all pages
+# Note: public/_redirects file is also used as a backup (more reliable)
+# Netlify automatically excludes existing files, so static assets are served directly
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  # Exclude static assets - they will be served directly
+  # Netlify checks file existence before applying redirects
+
 # Cache headers for static assets (1 year)
 [[headers]]
   for = "/assets/*"
