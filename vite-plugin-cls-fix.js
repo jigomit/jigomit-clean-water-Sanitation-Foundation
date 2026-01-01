@@ -338,10 +338,12 @@ export default function clsFixPlugin() {
       // Convert all render-blocking CSS to async loading
       const allCssRegex = /<link\s+rel="stylesheet"[^>]+href="([^"]+\.css)"[^>]*>/g
       modifiedHtml = modifiedHtml.replace(allCssRegex, (match, href) => {
-        // Extract crossorigin if present
-        const crossorigin = match.includes('crossorigin') ? ' crossorigin' : ''
+        // Extract crossorigin if present in original stylesheet
+        const hasCrossorigin = match.includes('crossorigin')
+        const crossorigin = hasCrossorigin ? ' crossorigin' : ''
         // Convert to preload with async loading (removes render-blocking for Desktop)
-        return `    <link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'">\n    <noscript><link rel="stylesheet" href="${href}"${crossorigin}></noscript>`
+        // Add crossorigin to preload to match credentials mode (fixes console warning)
+        return `    <link rel="preload" href="${href}" as="style"${crossorigin} onload="this.onload=null;this.rel='stylesheet'">\n    <noscript><link rel="stylesheet" href="${href}"${crossorigin}></noscript>`
       })
       
       // Performance: Ensure CSS loads asynchronously (Desktop optimization)
