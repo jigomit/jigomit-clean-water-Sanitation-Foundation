@@ -82,8 +82,8 @@ export default defineConfig(async () => {
     },
     // Enable compression
     reportCompressedSize: true,
-    // Performance: Optimize asset handling - reduce inline limit for Desktop 95%+ optimization
-    assetsInlineLimit: 512, // Inline assets smaller than 512 bytes (very aggressive for Desktop)
+    // Performance: Optimize asset handling - reduce inline limit for 90%+ optimization
+    assetsInlineLimit: 256, // Inline assets smaller than 256 bytes (very aggressive for 90%+)
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
@@ -106,10 +106,11 @@ export default defineConfig(async () => {
               return `view-${viewName.toLowerCase()}`
             }
           }
-          // Split large component chunks
+          // Split ALL component chunks for better code splitting (90%+ optimization)
           if (id.includes('/components/') && !id.includes('node_modules')) {
             const componentName = id.split('/components/')[1]?.split('.')[0]
-            if (componentName && componentName.length > 10) {
+            if (componentName) {
+              // Split all components for better performance (not just large ones)
               return `component-${componentName.toLowerCase()}`
             }
           }
@@ -133,8 +134,8 @@ export default defineConfig(async () => {
         },
       },
     },
-    // Performance: Stricter chunk size limit for Desktop 95%+ optimization
-    chunkSizeWarningLimit: 250, // Very strict for optimal Desktop performance
+    // Performance: Stricter chunk size limit for 90%+ optimization
+    chunkSizeWarningLimit: 200, // Very strict for optimal 90%+ performance
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
@@ -143,8 +144,16 @@ export default defineConfig(async () => {
     css: {
       devSourcemap: false,
     },
-    // Performance: Target modern browsers for Desktop 95%+ optimization
+    // Performance: Target modern browsers for 90%+ optimization
     target: ['es2022', 'edge88', 'firefox78', 'chrome87', 'safari14'], // ES2022 for maximum optimization
+    // Performance: Additional optimizations for 90%+
+    esbuild: {
+      drop: ['console', 'debugger'],
+      legalComments: 'none',
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+    },
     // Performance: Optimize module resolution for Desktop 95%+
     modulePreload: {
       polyfill: false, // Modern browsers support modulepreload natively
@@ -158,9 +167,9 @@ export default defineConfig(async () => {
       moduleSideEffects: false,
     },
   },
-    // Image optimization
-    assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg', '**/*.webp'],
-    // Clear cache on build
-    clearScreen: false,
+  // Image optimization
+  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.svg', '**/*.webp'],
+  // Clear cache on build
+  clearScreen: false,
   }
 })
