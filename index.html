@@ -26,24 +26,29 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cleanwatersanitation.org/" />
+    <meta property="og:url" content="https://jigomit-clean-water-sanitation.netlify.app/" />
     <meta property="og:title" content="LifeSpring Water Foundation | Building Water Security" />
     <meta
       property="og:description"
       content="Engineering water security with local leadership. We build wells, filtration systems, and provide hygiene education for sustainable water access."
     />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="https://jigomit-clean-water-sanitation.netlify.app/logo.png" />
+    <meta property="og:image:width" content="170" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="LifeSpring Water Foundation Logo" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="LifeSpring Water Foundation" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://cleanwatersanitation.org/" />
+    <meta property="twitter:url" content="https://jigomit-clean-water-sanitation.netlify.app/" />
     <meta property="twitter:title" content="LifeSpring Water Foundation" />
     <meta
       property="twitter:description"
       content="Building water security through locally-led teams. 31 communities served with 99% system uptime."
     />
-    <meta property="twitter:image" content="/og-image.jpg" />
+    <meta property="twitter:image" content="https://jigomit-clean-water-sanitation.netlify.app/logo.png" />
+    <meta property="twitter:image:alt" content="LifeSpring Water Foundation Logo" />
 
     <!-- Theme and Icons -->
     <meta name="theme-color" content="#0bb2d4" />
@@ -80,9 +85,64 @@
     <!-- SEO: Canonical URL -->
     <link rel="canonical" href="https://jigomit-clean-water-sanitation.netlify.app/" />
     
+    <!-- SEO: Structured Data (JSON-LD) for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LifeSpring Water Foundation",
+      "alternateName": "LifeSpring Foundation",
+      "url": "https://jigomit-clean-water-sanitation.netlify.app/",
+      "logo": "https://jigomit-clean-water-sanitation.netlify.app/logo.png",
+      "description": "Building water security with local leadership. We deploy proven WASH strategies so every family gains dignified, long-term access to safe water and sanitation.",
+      "foundingDate": "2020",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "General Inquiry",
+        "email": "info@lifespringfoundation.org"
+      },
+      "sameAs": [
+        "https://jigomit-clean-water-sanitation.netlify.app/"
+      ],
+      "areaServed": {
+        "@type": "Place",
+        "name": "East Africa"
+      }
+    }
+    </script>
+    
+    <!-- SEO: Structured Data (JSON-LD) for Website -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "LifeSpring Water Foundation",
+      "url": "https://jigomit-clean-water-sanitation.netlify.app/",
+      "description": "Building water security with local leadership. We deploy proven WASH strategies so every family gains dignified, long-term access to safe water and sanitation.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "LifeSpring Water Foundation",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jigomit-clean-water-sanitation.netlify.app/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://jigomit-clean-water-sanitation.netlify.app/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
     <!-- Robots -->
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   </head>
   <body>
     <div id="app"></div>
