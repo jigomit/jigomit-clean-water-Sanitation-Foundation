@@ -311,14 +311,26 @@ export default function clsFixPlugin() {
       const indexJsMatch = modifiedHtml.match(indexJsRegex)
       const vueVendorMatch = modifiedHtml.match(vueVendorRegex)
       
-      // Preload index.js early (reduces critical path latency)
+      // Preload index.js early with high priority (reduces critical path latency for 90%+)
       if (indexJsMatch && indexJsMatch[1]) {
         const indexJsPath = indexJsMatch[1]
-        const preloadIndexJs = `    <link rel="modulepreload" href="${indexJsPath}" crossorigin>\n`
+        const preloadIndexJs = `    <link rel="modulepreload" href="${indexJsPath}" fetchpriority="high" crossorigin>\n`
         if (modifiedHtml.includes('</head>')) {
           modifiedHtml = modifiedHtml.replace('</head>', `${preloadIndexJs}  </head>`)
         }
       }
+      
+      // Performance: Add fetchpriority="high" to all critical modulepreload links (90%+ optimization)
+      // Prioritize Vue vendor and main entry for faster loading
+      modifiedHtml = modifiedHtml.replace(
+        /<link\s+rel="modulepreload"[^>]*href="([^"]*(?:vue-vendor|index)[^"]*\.js)"[^>]*(?!fetchpriority)/gi,
+        (match) => {
+          if (!match.includes('fetchpriority')) {
+            return match.replace('crossorigin', 'fetchpriority="high" crossorigin')
+          }
+          return match
+        }
+      )
       
       // Preload Vue vendor early if not already preloaded
       if (vueVendorMatch && vueVendorMatch[1]) {
@@ -341,13 +353,28 @@ export default function clsFixPlugin() {
         // Extract crossorigin if present in original stylesheet
         const hasCrossorigin = match.includes('crossorigin')
         const crossorigin = hasCrossorigin ? ' crossorigin' : ''
+        // Determine if this is critical CSS (index.css is critical for LCP)
+        const isCritical = href.includes('index') && !href.includes('component-')
+        const fetchpriority = isCritical ? ' fetchpriority="high"' : ''
         // Convert to preload with async loading (removes render-blocking for Desktop)
         // Add crossorigin to preload to match credentials mode (fixes console warning)
-        return `    <link rel="preload" href="${href}" as="style"${crossorigin} onload="this.onload=null;this.rel='stylesheet'">\n    <noscript><link rel="stylesheet" href="${href}"${crossorigin}></noscript>`
+        return `    <link rel="preload" href="${href}" as="style"${fetchpriority}${crossorigin} onload="this.onload=null;this.rel='stylesheet'">\n    <noscript><link rel="stylesheet" href="${href}"${crossorigin}></noscript>`
       })
       
       // Performance: Ensure CSS loads asynchronously (Desktop optimization)
       // Modern browsers support onload on link[rel="preload"], no fallback needed
+      
+      // Performance: Optimize main script loading (90%+ optimization)
+      // Ensure main script has defer and proper prioritization
+      modifiedHtml = modifiedHtml.replace(
+        /<script\s+type="module"[^>]*src="([^"]*index[^"]*\.js)"[^>]*(?!defer)/gi,
+        (match) => {
+          if (!match.includes('defer')) {
+            return match.replace('type="module"', 'type="module" defer')
+          }
+          return match
+        }
+      )
       
       // Performance: Reduce main-thread blocking by deferring Vue vendor execution (90%+ optimization)
       // This reduces Total Blocking Time and improves Time to Interactive
