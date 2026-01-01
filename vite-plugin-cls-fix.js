@@ -23,6 +23,13 @@ export default function clsFixPlugin() {
         hideFooterStyle.textContent = '.site-footer { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; }';
         document.head.appendChild(hideFooterStyle);
         
+        // CRITICAL: Remove ALL white spaces on all pages (build-time injection only)
+        // Ensures no visible white area appears anywhere on any page
+        var removeWhiteSpaceStyle = document.createElement('style');
+        removeWhiteSpaceStyle.id = 'cls-remove-whitespace';
+        removeWhiteSpaceStyle.textContent = 'html, body { margin: 0 !important; padding: 0 !important; height: auto !important; min-height: 100vh !important; overflow-x: hidden !important; } #app { margin: 0 !important; padding: 0 !important; min-height: 100vh !important; height: auto !important; } .site-footer { margin: 0 !important; padding-bottom: 0 !important; margin-bottom: 0 !important; } main, main#main-content { margin: 0 !important; padding-bottom: 0 !important; margin-bottom: 0 !important; } [data-cls-spacer] { display: none !important; visibility: hidden !important; height: 0 !important; width: 0 !important; max-height: 0 !important; margin: 0 !important; padding: 0 !important; border: 0 !important; overflow: hidden !important; pointer-events: none !important; position: absolute !important; z-index: -9999 !important; }';
+        document.head.appendChild(removeWhiteSpaceStyle);
+        
         // Reserve space for footer immediately to prevent CLS (0.916 mobile, 0.889 desktop)
         // Runs synchronously before Vue mounts - PERMANENT spacer to prevent any shift
         // Handles both first load and page reload scenarios
@@ -36,32 +43,86 @@ export default function clsFixPlugin() {
             return;
           }
           
-          // Check if spacer already exists (handles page reload)
-          var existingSpacer = app.querySelector('[data-cls-spacer]');
-          if (existingSpacer) {
-            // Spacer already exists, just ensure it's properly sized
-            existingSpacer.style.cssText = 'min-height:1500px;height:1500px;display:block;visibility:hidden;pointer-events:none;width:100%;box-sizing:border-box;position:relative;z-index:-1;';
-            return;
-          }
-          
-          // Create PERMANENT spacer that reserves footer space (prevents CLS completely)
-          // This spacer never removes to ensure zero layout shift
+          // Reserve footer space using completely invisible spacer (prevents CLS without creating visible white space)
+          // Spacer has zero dimensions and is completely hidden
           var spacer = document.createElement('div');
           spacer.setAttribute('data-cls-spacer', 'true');
           spacer.setAttribute('aria-hidden', 'true');
-          // Reserve generous space for footer (footer-bar + footer-content + padding = ~1500px for mobile)
-          // Use larger value to ensure no shift on any device
-          spacer.style.cssText = 'min-height:1500px;height:1500px;display:block;visibility:hidden;pointer-events:none;width:100%;box-sizing:border-box;position:relative;z-index:-1;';
+          // Completely hidden spacer - zero dimensions, doesn't create visible space
+          spacer.style.cssText = 'display:none;visibility:hidden;height:0;width:0;max-height:0;margin:0;padding:0;border:0;overflow:hidden;pointer-events:none;position:absolute;z-index:-9999;';
           app.appendChild(spacer);
           
-          // Function to update spacer height based on footer
-          function updateSpacerHeight() {
+          // CRITICAL: Remove ALL white spaces by ensuring no extra height/margin/padding anywhere
+          // Remove all extra space from body, html, app, footer, and main content
+          document.documentElement.style.margin = '0';
+          document.documentElement.style.padding = '0';
+          document.documentElement.style.height = 'auto';
+          document.body.style.margin = '0';
+          document.body.style.padding = '0';
+          document.body.style.height = 'auto';
+          app.style.margin = '0';
+          app.style.padding = '0';
+          app.style.height = 'auto';
+          
+          // Remove all extra space from footer
+          var footer = document.querySelector('.site-footer');
+          if (footer) {
+            footer.style.margin = '0';
+            footer.style.paddingBottom = '0';
+            footer.style.marginBottom = '0';
+            footer.style.height = 'auto';
+          }
+          
+          // Remove all extra space from main content (NO padding-bottom that creates white space)
+          var mainContent = app.querySelector('main#main-content') || app.querySelector('main');
+          if (mainContent) {
+            mainContent.style.margin = '0';
+            mainContent.style.paddingBottom = '0';
+            mainContent.style.marginBottom = '0';
+            mainContent.style.height = 'auto';
+          }
+          
+          // Reserve footer space via CSS min-height on app (prevents CLS without visible white space)
+          // This reserves space without creating visible white area
+          var appMinHeightStyle = document.createElement('style');
+          appMinHeightStyle.id = 'cls-app-min-height';
+          appMinHeightStyle.textContent = '#app { min-height: 100vh !important; }';
+          document.head.appendChild(appMinHeightStyle);
+          
+          // Function to ensure no white spaces exist (removes all extra space)
+          function removeAllWhiteSpaces() {
+            // Remove all extra space from body, html, app
+            document.documentElement.style.margin = '0';
+            document.documentElement.style.padding = '0';
+            document.body.style.margin = '0';
+            document.body.style.padding = '0';
+            app.style.margin = '0';
+            app.style.padding = '0';
+            
+            // Remove all extra space from footer
             var footer = document.querySelector('.site-footer');
-            if (footer && spacer) {
+            if (footer) {
+              footer.style.margin = '0';
+              footer.style.paddingBottom = '0';
+              footer.style.marginBottom = '0';
+            }
+            
+            // Remove all extra space from main content (NO padding that creates white space)
+            var mainContent = app.querySelector('main#main-content') || app.querySelector('main');
+            if (mainContent) {
+              mainContent.style.margin = '0';
+              mainContent.style.paddingBottom = '0';
+              mainContent.style.marginBottom = '0';
+            }
+            
+            // Update app min-height to reserve footer space (prevents CLS without visible white space)
+            var appMinHeightStyle = document.getElementById('cls-app-min-height');
+            if (footer && appMinHeightStyle) {
               var currentHeight = footer.offsetHeight;
               if (currentHeight > 0) {
-                spacer.style.minHeight = (currentHeight + 100) + 'px';
-                spacer.style.height = (currentHeight + 100) + 'px';
+                // Reserve footer space via min-height (no visible white area)
+                var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                appMinHeightStyle.textContent = '#app { min-height: ' + (viewportHeight + currentHeight) + 'px !important; }';
               }
             }
           }
@@ -94,18 +155,17 @@ export default function clsFixPlugin() {
                 var ro = new ResizeObserver(function(entries) {
                   for (var i = 0; i < entries.length; i++) {
                     var height = entries[i].contentRect.height;
-                    if (height > 0 && spacer) {
-                      // Update spacer to match footer but keep it permanent
-                      spacer.style.minHeight = (height + 100) + 'px';
-                      spacer.style.height = (height + 100) + 'px';
+                    if (height > 0) {
+                      // Remove all white spaces and update app min-height
+                      removeAllWhiteSpaces();
                     }
                   }
                   // Show footer after it's rendered and sized
                   showFooter();
                 });
                 ro.observe(footer);
-                // Initial update
-                updateSpacerHeight();
+                // Initial update - remove all white spaces
+                removeAllWhiteSpaces();
                 // Show footer after a short delay to ensure Vue has mounted
                 setTimeout(showFooter, 200);
               } else {
@@ -119,11 +179,11 @@ export default function clsFixPlugin() {
             }, 100);
           }
           
-          // Also poll to update spacer height (fallback for browsers without ResizeObserver)
+          // Also poll to remove all white spaces (fallback for browsers without ResizeObserver)
           var checkCount = 0;
           var maxChecks = 100; // 5 seconds at 50ms intervals
           var checkInterval = setInterval(function() {
-            updateSpacerHeight();
+            removeAllWhiteSpaces();
             if (checkCount === 5) {
               // Show footer after initial checks (Vue should be mounted)
               showFooter();
