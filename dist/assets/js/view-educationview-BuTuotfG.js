@@ -1,0 +1,1 @@
+import{_ as e}from"./component-educationsection-CVrvdeEW.js";import{c as s,s as t,o as a}from"./vue-vendor-B8kP0m4T.js";const c={class:"view-stack"},m={__name:"EducationView",setup(o){return(_,r)=>(a(),s("div",c,[t(e)]))}};export{m as default};

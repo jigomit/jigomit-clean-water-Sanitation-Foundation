@@ -83,20 +83,22 @@ export default defineConfig(async () => {
     // Enable compression
     reportCompressedSize: true,
     // Performance: Optimize asset handling - reduce inline limit for 90%+ optimization
-    assetsInlineLimit: 256, // Inline assets smaller than 256 bytes (very aggressive for 90%+)
+    assetsInlineLimit: 128, // Inline assets smaller than 128 bytes (very aggressive for 90%+)
     // Optimize chunking for better caching
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Performance: Aggressive chunk splitting for PageSpeed optimization
-          // Separate vendor chunks for better caching
+          // Performance: Aggressive chunk splitting for PageSpeed optimization (90%+ target)
+          // Separate vendor chunks for better caching and smaller initial bundles
           if (id.includes('node_modules')) {
-            if (id.includes('vue')) {
+            if (id.includes('vue') && !id.includes('vue-router')) {
+              // Split Vue core from Vue Router for better code splitting
               return 'vue-vendor'
             }
             if (id.includes('vue-router')) {
               return 'router-vendor'
             }
+            // Split other vendors into separate chunks
             return 'vendor'
           }
           // Split ALL view components for better code splitting (including HomeView)
@@ -135,7 +137,7 @@ export default defineConfig(async () => {
       },
     },
     // Performance: Stricter chunk size limit for 90%+ optimization
-    chunkSizeWarningLimit: 200, // Very strict for optimal 90%+ performance
+    chunkSizeWarningLimit: 150, // Very strict for optimal 90%+ performance (reduced from 200)
     // Enable source maps for production debugging (optional, can disable for smaller builds)
     sourcemap: false,
     // Optimize CSS
