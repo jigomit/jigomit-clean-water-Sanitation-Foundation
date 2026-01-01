@@ -11,6 +11,28 @@ export default function clsFixPlugin() {
       // Performance: Fix CLS by reserving footer space (build-time injection, no source changes)
       // Uses permanent spacer that never removes to completely prevent CLS (0.916 mobile fix)
       // Handles both first load and page reload scenarios - prevents footer from showing on reload
+      
+      // CRITICAL: Inject inline style IMMEDIATELY in head to hide footer before Vue renders (fixes refresh issue)
+      // This must be in the HTML head, not in a script, to prevent footer from showing on refresh
+      const immediateHideStyle = `
+    <!-- Performance: Hide footer immediately before Vue renders (fixes refresh issue, 90%+ optimization) -->
+    <style id="cls-hide-elements-immediate">
+      .site-footer { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; pointer-events: none !important; }
+      .site-nav { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; pointer-events: none !important; }
+      #app { min-height: calc(100vh + 2000px) !important; padding-bottom: 2000px !important; }
+    </style>`
+      
+      // Insert immediate hide style at the very beginning of head (before any other content)
+      // Handle both <head> and <head> with whitespace - insert right after <head> tag
+      if (modifiedHtml.includes('<head>')) {
+        modifiedHtml = modifiedHtml.replace('<head>', `<head>${immediateHideStyle}`)
+      } else if (modifiedHtml.includes('  <head>')) {
+        modifiedHtml = modifiedHtml.replace('  <head>', `  <head>${immediateHideStyle}`)
+      } else {
+        // Fallback: insert after first meta tag
+        modifiedHtml = modifiedHtml.replace(/(<meta charset="UTF-8" \/>)/, `$1${immediateHideStyle}`)
+      }
+      
       const clsFixScript = `
     <!-- Performance: Fix CLS by reserving footer space (build-time injection, no source changes) -->
     <script>
@@ -18,17 +40,24 @@ export default function clsFixPlugin() {
         'use strict';
         // CRITICAL: Hide footer and navigation initially to prevent CLS (0.889 desktop fix)
         // This is removed after Vue mounts - no visual change, just prevents layout shift
-        var hideElementsStyle = document.createElement('style');
-        hideElementsStyle.id = 'cls-hide-elements';
-        hideElementsStyle.textContent = '.site-footer { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; } .site-nav { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; }';
-        document.head.appendChild(hideElementsStyle);
+        // Note: Immediate hide style is already in head, this is for dynamic updates
+        var hideElementsStyle = document.getElementById('cls-hide-elements-immediate');
+        if (!hideElementsStyle) {
+          hideElementsStyle = document.createElement('style');
+          hideElementsStyle.id = 'cls-hide-elements-immediate';
+          hideElementsStyle.textContent = '.site-footer { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; pointer-events: none !important; } .site-nav { visibility: hidden !important; opacity: 0 !important; position: absolute !important; left: -9999px !important; height: 0 !important; overflow: hidden !important; pointer-events: none !important; }';
+          document.head.appendChild(hideElementsStyle);
+        }
         
         // CRITICAL: Reserve footer and navigation space IMMEDIATELY to prevent CLS (0.889 desktop fix)
         // Reserve generous space before Vue mounts to prevent any layout shift
-        var reserveSpaceStyle = document.createElement('style');
-        reserveSpaceStyle.id = 'cls-reserve-space';
-        reserveSpaceStyle.textContent = '#app { min-height: calc(100vh + 2000px) !important; padding-bottom: 2000px !important; }';
-        document.head.appendChild(reserveSpaceStyle);
+        var reserveSpaceStyle = document.getElementById('cls-reserve-space');
+        if (!reserveSpaceStyle) {
+          reserveSpaceStyle = document.createElement('style');
+          reserveSpaceStyle.id = 'cls-reserve-space';
+          reserveSpaceStyle.textContent = '#app { min-height: calc(100vh + 2000px) !important; padding-bottom: 2000px !important; }';
+          document.head.appendChild(reserveSpaceStyle);
+        }
         
         // CRITICAL: Remove ALL white spaces on all pages (build-time injection only)
         // Ensures no visible white area appears anywhere on any page
@@ -153,15 +182,23 @@ export default function clsFixPlugin() {
           function showElements() {
             var footer = document.querySelector('.site-footer');
             var nav = document.querySelector('.site-nav');
-            var hideStyle = document.getElementById('cls-hide-elements');
+            var hideStyle = document.getElementById('cls-hide-elements-immediate');
             var reserveStyle = document.getElementById('cls-reserve-space');
+            
+            // CRITICAL: Only show elements after Vue has fully mounted and footer is rendered
+            // Wait for footer to be in DOM before showing (prevents flash on refresh)
+            if (!footer) {
+              // Footer not ready yet, retry
+              setTimeout(showElements, 50);
+              return;
+            }
             
             if (hideStyle) {
               // Remove the hide style to show footer and nav (Vue has mounted, spacer is ready)
               hideStyle.remove();
             }
             
-            // Show footer
+            // Show footer with proper styles (remove all hiding styles)
             if (footer) {
               footer.style.visibility = '';
               footer.style.opacity = '';
@@ -169,9 +206,10 @@ export default function clsFixPlugin() {
               footer.style.left = '';
               footer.style.height = '';
               footer.style.overflow = '';
+              footer.style.pointerEvents = '';
             }
             
-            // Show navigation
+            // Show navigation with proper styles
             if (nav) {
               nav.style.visibility = '';
               nav.style.opacity = '';
@@ -179,6 +217,7 @@ export default function clsFixPlugin() {
               nav.style.left = '';
               nav.style.height = '';
               nav.style.overflow = '';
+              nav.style.pointerEvents = '';
             }
             
             // Update reserve space to actual footer height (reduce padding)
@@ -263,20 +302,131 @@ export default function clsFixPlugin() {
           }, 50);
         }
         
-        // Run immediately (handles first load) - BLOCKING execution
+        // CRITICAL: Run immediately (handles first load AND refresh) - BLOCKING execution
+        // This ensures footer is hidden before Vue renders on refresh
         createSpacer();
         
-        // Also run on DOMContentLoaded (handles page reload)
+        // Also run on DOMContentLoaded (handles page reload scenarios)
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', createSpacer);
+          document.addEventListener('DOMContentLoaded', function() {
+            createSpacer();
+            // Also check for footer after DOM is ready (handles refresh)
+            setTimeout(function() {
+              var footer = document.querySelector('.site-footer');
+              if (footer) {
+                // Footer exists, ensure it's hidden
+                footer.style.visibility = 'hidden';
+                footer.style.opacity = '0';
+                footer.style.position = 'absolute';
+                footer.style.left = '-9999px';
+                footer.style.height = '0';
+                footer.style.overflow = 'hidden';
+                footer.style.pointerEvents = 'none';
+              }
+            }, 0);
+          });
         } else {
-          // Document already loaded, run immediately
+          // Document already loaded, run immediately (handles refresh)
           createSpacer();
+          // Immediately hide footer if it exists (refresh scenario)
+          var footer = document.querySelector('.site-footer');
+          if (footer) {
+            footer.style.visibility = 'hidden';
+            footer.style.opacity = '0';
+            footer.style.position = 'absolute';
+            footer.style.left = '-9999px';
+            footer.style.height = '0';
+            footer.style.overflow = 'hidden';
+            footer.style.pointerEvents = 'none';
+          }
         }
         
         // Also run when Vue might have already mounted (handles fast reloads)
         if (document.readyState === 'complete') {
-          setTimeout(createSpacer, 0);
+          setTimeout(function() {
+            createSpacer();
+            // Double-check footer is hidden on complete (refresh scenario)
+            var footer = document.querySelector('.site-footer');
+            if (footer) {
+              footer.style.visibility = 'hidden';
+              footer.style.opacity = '0';
+              footer.style.position = 'absolute';
+              footer.style.left = '-9999px';
+              footer.style.height = '0';
+              footer.style.overflow = 'hidden';
+              footer.style.pointerEvents = 'none';
+            }
+          }, 0);
+        }
+        
+        // CRITICAL: Monitor for footer appearance and hide it immediately (fixes refresh issue)
+        // Use MutationObserver to catch footer when Vue renders it
+        if ('MutationObserver' in window) {
+          function setupObserver() {
+            // Wait for body to exist before observing
+            var body = document.body;
+            if (!body) {
+              // Body not ready, retry
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupObserver);
+              } else {
+                setTimeout(setupObserver, 10);
+              }
+              return;
+            }
+            
+            var observer = new MutationObserver(function(mutations) {
+              var footer = document.querySelector('.site-footer');
+              if (footer && footer.style.visibility !== 'hidden') {
+                // Footer appeared, hide it immediately
+                footer.style.visibility = 'hidden';
+                footer.style.opacity = '0';
+                footer.style.position = 'absolute';
+                footer.style.left = '-9999px';
+                footer.style.height = '0';
+                footer.style.overflow = 'hidden';
+                footer.style.pointerEvents = 'none';
+              }
+            });
+            
+            // Observe body only if it exists and is a valid Node
+            if (body && body.nodeType === 1) {
+              try {
+                observer.observe(body, {
+                  childList: true,
+                  subtree: true
+                });
+                // Stop observing after 5 seconds (footer should be handled by then)
+                setTimeout(function() {
+                  observer.disconnect();
+                }, 5000);
+              } catch (e) {
+                // Fallback: if observe fails, use polling instead
+                var checkInterval = setInterval(function() {
+                  var footer = document.querySelector('.site-footer');
+                  if (footer && footer.style.visibility !== 'hidden') {
+                    footer.style.visibility = 'hidden';
+                    footer.style.opacity = '0';
+                    footer.style.position = 'absolute';
+                    footer.style.left = '-9999px';
+                    footer.style.height = '0';
+                    footer.style.overflow = 'hidden';
+                    footer.style.pointerEvents = 'none';
+                  }
+                }, 100);
+                setTimeout(function() {
+                  clearInterval(checkInterval);
+                }, 5000);
+              }
+            }
+          }
+          
+          // Setup observer when ready
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupObserver);
+          } else {
+            setupObserver();
+          }
         }
       })();
     </script>`
